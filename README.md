@@ -5,4 +5,4 @@ https://github.com/DesignRevision/shards-dashboard-react
 
     웹 템플릿
 # License
-This project is licensed under the MIT License - see the [Nextop_Online_Judge-Ver2.0/LICENSE](LICENSE)
+This project is licensed under the Apache 2.0 License - see the [Nextop_Online_Judge-Ver2.0/LICENSE](LICENSE)
