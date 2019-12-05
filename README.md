@@ -1,5 +1,9 @@
 # Nextop_Online_Judge-Ver2.0
     Nextop_Online_Judge Site
+# Before this project
+https://github.com/BSAA0203/Nextop_Online_Judge
+
+    About ver1.0
 # Open-source template
 https://github.com/DesignRevision/shards-dashboard-react
 
