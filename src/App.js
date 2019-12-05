@@ -6,11 +6,12 @@ import withTracker from "./withTracker";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/shards-dashboards.1.1.0.min.css";
+import Login from "./views/Login";
 
 export default () => (
   <Router basename={""}>
     <div>
-      {routes.map((route, index) => {
+      {/* {routes.map((route, index) => {
         return (
           <Route
             key={index}
@@ -25,7 +26,8 @@ export default () => (
             })}
           />
         );
-      })}
+      })} */}
+      <Login />
     </div>
   </Router>
 );
