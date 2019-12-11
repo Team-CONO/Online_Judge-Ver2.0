@@ -5,7 +5,7 @@ import { Container, Row, Col } from "shards-react";
 const TestLab = ({}) => (
     <Container>
         <Row>
-            <Col>It Works!</Col>
+            <Col>Login Page!</Col>
         </Row>
     </Container>
 )

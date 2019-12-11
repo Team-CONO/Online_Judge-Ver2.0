@@ -6,7 +6,6 @@ import withTracker from "./withTracker";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/shards-dashboards.1.1.0.min.css";
-import Login from "./views/Login";
 
 export default () => (
   <Router basename={""}>
@@ -27,7 +26,6 @@ export default () => (
           />
         );
       })}
-      {/* <Login /> */}
     </div>
   </Router>
 );
