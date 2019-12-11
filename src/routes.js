@@ -27,6 +27,11 @@ export default [
     component: TestLab
   },
   {
+    path: '/login',
+    layout: TestLab,
+    component: TestLab
+  },
+  {
     path: "/blog-overview",
     layout: DefaultLayout,
     component: BlogOverview
