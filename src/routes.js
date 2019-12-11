@@ -12,6 +12,7 @@ import Errors from "./views/Errors";
 import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
+import TestLab from "./views/TestLab";
 
 export default [
   {
@@ -19,6 +20,11 @@ export default [
     exact: true,
     layout: DefaultLayout,
     component: () => <Redirect to="/blog-overview" />
+  },
+  {
+    path: '/test-lab',
+    layout: DefaultLayout,
+    component: TestLab
   },
   {
     path: "/blog-overview",
