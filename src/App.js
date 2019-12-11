@@ -11,7 +11,7 @@ import Login from "./views/Login";
 export default () => (
   <Router basename={""}>
     <div>
-      {/* {routes.map((route, index) => {
+      {routes.map((route, index) => {
         return (
           <Route
             key={index}
@@ -26,8 +26,8 @@ export default () => (
             })}
           />
         );
-      })} */}
-      <Login />
+      })}
+      {/* <Login /> */}
     </div>
   </Router>
 );
