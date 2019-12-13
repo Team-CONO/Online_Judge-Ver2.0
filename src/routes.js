@@ -12,25 +12,26 @@ import Errors from "./views/Errors";
 import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
-import TestLab from "./views/TestLab";
+//import TestLab from "./views/TestLab";
+import Login from "./views/Login";
 
 export default [
   {
     path: "/",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/login" />
+    component: () => <Redirect to="/Login" />
   },
   {
-    path: '/test-lab',
+    path:"/Login",
     layout: DefaultLayout,
-    component: TestLab
+    component: Login
   },
-  {
-    path: '/login',
-    layout: TestLab,
-    component: TestLab
-  },
+  // {
+  //   path: '/test-lab',
+  //   layout: DefaultLayout,
+  //   component: TestLab
+  // },
   {
     path: "/blog-overview",
     layout: DefaultLayout,
