@@ -6,11 +6,12 @@ https://github.com/BSAA0203/Nextop_Online_Judge
     About ver1.0
 # Prerequisites
     Node.js v10.16.3
+    
     Firebase Realtime DB & Auth(google)
 # Get Start
-    >> cd Nextop_Online_Judge-Ver2.0
-    >> yarn
-    >> yarn start
+    > cd Nextop_Online_Judge-Ver2.0
+    > yarn
+    > yarn start
 # Open-source template
 https://github.com/DesignRevision/shards-dashboard-react
 
