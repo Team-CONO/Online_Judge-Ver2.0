@@ -5,7 +5,8 @@ https://github.com/BSAA0203/Nextop_Online_Judge
 
     About ver1.0
 # Prerequisites
-    Node.js v10.16.3  
+    Node.js v10.16.3
+    Firebase Realtime DB & Auth(google)
 # Get Start
     >> cd Nextop_Online_Judge-Ver2.0
     >> yarn
