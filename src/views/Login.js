@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, FormInput, FormGroup, Button } from "shards-react";
+import logo from '../images/logo.png'
 
 class Login extends Component {
     render() {
@@ -7,7 +8,7 @@ class Login extends Component {
             <Container>
                 <Row>
                     <Col>
-                        <img src="http://www.nextopedu.co.kr/default/img/_images/logo.png" />
+                        <img src={logo} />
                     </Col>            
                 </Row>
                 <Row>
