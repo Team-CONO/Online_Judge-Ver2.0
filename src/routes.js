@@ -22,16 +22,16 @@ export default [
     layout: DefaultLayout,
     component: () => <Redirect to="/Login" />
   },
-  {
-    path:"/Login",
-    layout: nonDefaultLayout,
-    component: Login
-  },
   // {
   //   path: '/test-lab',
   //   layout: DefaultLayout,
   //   component: TestLab
   // },
+  {
+    path:"/Login",
+    layout: nonDefaultLayout,
+    component: Login
+  },
   {
     path: "/blog-overview",
     layout: DefaultLayout,
