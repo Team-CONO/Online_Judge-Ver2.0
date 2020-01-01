@@ -7,41 +7,40 @@ import {
     FormInput,
     FormGroup,
     Button,
-    Tooltip,
     Card,
     CardHeader,
-    CardBody, }from "shards-react";
+    CardBody, } from "shards-react";
 import logo from '../images/logo.png'
 
 class Login extends Component {
     render() {
         return (
-            <Container fluid>
-                <Row>
-                    <Col xs={{ offset : 5 }} lg ={{ offset:6 }}>
+            <Container fluid className = "text-center">
+                <Row className="page-header py-4">
+                    <Col>
                         <img src={ logo } />
                     </Col>            
                 </Row>
                 <Row>
-                    <Col xs={{size:"12" ,offset:"3"}} lg={{ offset:5 }}>
-                        <Card style={{maxWidth : "300px"}}>
-                            <CardHeader className="border-bottom">
+                    <Col lg={{ offset:5 }} sm={{ offset:4 }}>
+                        <Card style={{ maxWidth : "300px" }}>
+                            <CardHeader className = "border-bottom">
                             <h3>Sign to Nextop!</h3>
                             </CardHeader>
 
                             <CardBody>
                                 <Form>
-                                    <FormGroup>
+                                    <FormGroup className = "text-left">
                                         <label htmlFor="#Email">이메일</label>
                                         <FormInput id="#Email" placeholder="Email" />
                                     </FormGroup>
 
-                                    <FormGroup>
+                                    <FormGroup className = "text-left">
                                         <label htmlFor="#password">비밀번호</label>
                                         <FormInput type="password" id="#password" placeholder="Password" />
                                     </FormGroup>
                                     
-                                    <FormGroup className="mb-0">
+                                    <FormGroup className="mb-0 text-center">
                                         <Button theme="success" type="submit">
                                             로그인
                                         </Button>
@@ -51,11 +50,9 @@ class Login extends Component {
                         </Card>
                     </Col>
                 </Row>
-                <Row>
-                    <Col xs={{size:12,offset:5}} lg={{offset:6}}>                    
-                        <Button outline pill>
-                            Sign-up
-                        </Button>
+                <Row className="page-bottom py-5">
+                    <Col >
+                        <Button outline type="submit">넥스탑에 가입</Button>
                     </Col>
                 </Row>
             </Container>

@@ -8,11 +8,7 @@ import { Container, Row, Col } from "shards-react";
 
 const nonDefault = ({ children }) => (
   <Container fluid>
-    <Row>
-      <Col>
-        {children}
-      </Col>
-    </Row>
+    {children}
   </Container>
 );
 
