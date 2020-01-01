@@ -13,31 +13,53 @@ import {
 import logo from '../images/logo.png'
 
 class Login extends Component {
+    state={
+        email:'',
+        password:''
+    }
+    handleSubmit=(e)=>{
+        e.preventDefault();
+    }
+    handleChange=(e)=>{
+        this.setState({
+            [e.target.email]: e.target.password
+        });
+    }
     render() {
         return (
-            <Container fluid className = "text-center">
+            <Container fluid className = "error__content">
                 <Row className="page-header py-4">
                     <Col>
                         <img src={ logo } />
                     </Col>            
                 </Row>
                 <Row>
-                    <Col lg={{ offset:5 }} sm={{ offset:4 }}>
-                        <Card style={{ maxWidth : "300px" }}>
+                    <Col>
+                        <Card style = {{maxWidth:"500px"}}>
                             <CardHeader className = "border-bottom">
                             <h3>Sign to Nextop!</h3>
                             </CardHeader>
 
                             <CardBody>
-                                <Form>
+                                <Form onSubmit={this.handleSubmit}>
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#Email">이메일</label>
-                                        <FormInput id="#Email" placeholder="Email" />
+                                        <FormInput 
+                                            type="email" 
+                                            id={this.state.email}
+                                            placeholder="Email"                                            
+                                            onChange={this.handleChange}
+                                        />
                                     </FormGroup>
 
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#password">비밀번호</label>
-                                        <FormInput type="password" id="#password" placeholder="Password" />
+                                        <FormInput 
+                                            type="password" 
+                                            id={this.state.password}
+                                            placeholder="Password" 
+                                            onChange={this.handleChange}
+                                        />
                                     </FormGroup>
                                     
                                     <FormGroup className="mb-0 text-center">
