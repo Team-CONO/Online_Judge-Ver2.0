@@ -21,11 +21,13 @@ class Login extends Component {
     handleSubmit=(e)=>{
         e.preventDefault();
         console.log("Click!");
+        console.log(this.state)
     }
     handleChange=(e)=>{
         this.setState({
-            [e.target.email]: e.target.password
-        });
+            [e.target.name]:e.target.value
+        })
+        console.log(this.state)
     }
     render() {
         return (
@@ -47,8 +49,8 @@ class Login extends Component {
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#Email">이메일</label>
                                         <FormInput 
-                                            type="email" 
-                                            id={this.state.email}
+                                            type="email"
+                                            name="email"
                                             placeholder="Email"                                            
                                             onChange={this.handleChange}
                                         />
@@ -57,8 +59,8 @@ class Login extends Component {
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#password">비밀번호</label>
                                         <FormInput 
-                                            type="password" 
-                                            id={this.state.password}
+                                            type="password"
+                                            name="password"
                                             placeholder="Password" 
                                             onChange={this.handleChange}
                                         />
