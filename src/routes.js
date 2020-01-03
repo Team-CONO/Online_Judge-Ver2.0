@@ -12,7 +12,7 @@ import Errors from "./views/Errors";
 import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
-//import TestLab from "./views/TestLab";
+// import TestLab from "./views/TestLab";
 import Login from "./views/Login";
 
 export default [
@@ -24,7 +24,7 @@ export default [
   },
   // {
   //   path: '/test-lab',
-  //   layout: DefaultLayout,
+  //   layout: nonDefaultLayout,
   //   component: TestLab
   // },
   {

@@ -10,6 +10,7 @@ import {
     Card,
     CardHeader,
     CardBody, } from "shards-react";
+import { Redirect } from 'react-router-dom';
 import logo from '../images/logo.png'
 
 class Login extends Component {
@@ -30,7 +31,7 @@ class Login extends Component {
             <Container fluid className = "error__content">
                 <Row className="page-header py-4">
                     <Col>
-                        <img src={ logo } />
+                        <Redirect to="/"><img src={ logo } /></Redirect>
                     </Col>            
                 </Row>
                 <Row>

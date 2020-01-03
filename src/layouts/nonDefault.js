@@ -7,7 +7,7 @@ import { Container, Row, Col } from "shards-react";
 // import MainFooter from "../components/layout/MainFooter";
 
 const nonDefault = ({ children }) => (
-  <Container fluid>
+  <Container fluid className = "error__content">
     {children}
   </Container>
 );
