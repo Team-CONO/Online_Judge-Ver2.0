@@ -10,7 +10,7 @@ import {
     Card,
     CardHeader,
     CardBody, } from "shards-react";
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../images/logo.png'
 
 class Login extends Component {
@@ -20,6 +20,7 @@ class Login extends Component {
     }
     handleSubmit=(e)=>{
         e.preventDefault();
+        console.log("Click!");
     }
     handleChange=(e)=>{
         this.setState({
@@ -31,7 +32,7 @@ class Login extends Component {
             <Container fluid className = "error__content">
                 <Row className="page-header py-4">
                     <Col>
-                        <Redirect to="/"><img src={ logo } /></Redirect>
+                        <Link to="/"><img src={ logo }/></Link>
                     </Col>            
                 </Row>
                 <Row>
