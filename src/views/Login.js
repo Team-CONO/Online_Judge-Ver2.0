@@ -11,17 +11,21 @@ import {
     CardHeader,
     CardBody, } from "shards-react";
 import { Link } from 'react-router-dom';
-import logo from '../images/logo.png'
+import logo from '../images/logo.png';
+import firebase, { fire } from '../Firebase';
 
 class Login extends Component {
-    state={
-        email:'',
-        password:''
+    constructor(props){
+        super(props);
+        fire();
+        this.state={
+            email:'',
+            password:''
+        }
     }
     handleSubmit=(e)=>{
         e.preventDefault();
         console.log("Click!");
-        console.log(this.state)
     }
     handleChange=(e)=>{
         this.setState({
