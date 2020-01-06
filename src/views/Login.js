@@ -13,30 +13,41 @@ import {
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import firebase, { fire } from '../Firebase';
+import { GoogleLoginButton  } from "react-social-login-buttons";
 
 class Login extends Component {
     constructor(props){
         super(props);
         fire();
-        this.state={
-            email:'',
-            password:''
-        }
+        // this.state={
+        //     email:'',
+        //     password:''
+        // }
     }
     handleSubmit=(e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         console.log("Click!");
+        try{
+            const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+            firebase
+            .auth()
+            .signInWithPopup(googleAuthProvider)
+            .then(alert('wwwwwwwwwwwelcome!'));
+        }catch(e){
+            alert(e);
+        }
+
     }
-    handleChange=(e)=>{
-        this.setState({
-            [e.target.name]:e.target.value
-        })
-        console.log(this.state)
-    }
+    // handleChange=(e)=>{
+    //     this.setState({
+    //         [e.target.name]:e.target.value
+    //     })
+    //     console.log(this.state)
+    // }
     render() {
         return (
             <Container fluid className = "error__content">
-                <Row className="page-header py-4">
+                <Row className="page-header py-5">
                     <Col>
                         <Link to="/"><img src={ logo }/></Link>
                     </Col>            
@@ -49,7 +60,8 @@ class Login extends Component {
                             </CardHeader>
 
                             <CardBody>
-                                <Form onSubmit={this.handleSubmit}>
+                                <GoogleLoginButton onClick={() => this.handleSubmit()} />
+                                {/* <Form onSubmit={this.handleSubmit}>
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#Email">이메일</label>
                                         <FormInput 
@@ -75,16 +87,16 @@ class Login extends Component {
                                             로그인
                                         </Button>
                                     </FormGroup>
-                                </Form>
+                                </Form> */}
                             </CardBody>
                         </Card>
                     </Col>
                 </Row>
-                <Row className="page-bottom py-5">
+                {/* <Row className="page-bottom py-5">
                     <Col >
                         <Button outline type="submit">넥스탑에 가입</Button>
                     </Col>
-                </Row>
+                </Row> */}
             </Container>
         );
     }
