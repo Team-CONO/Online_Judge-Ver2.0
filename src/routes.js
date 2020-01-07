@@ -5,7 +5,6 @@ import { Redirect } from "react-router-dom";
 import { DefaultLayout, nonDefaultLayout } from "./layouts";
 
 // Route Views
-import BlogOverview from "./views/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
 import AddNewPost from "./views/AddNewPost";
 import Errors from "./views/Errors";
@@ -14,6 +13,7 @@ import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 //import TestLab from "./views/TestLab";
 import Login from "./views/Login";
+import SignUpPage from "./views/SignUpPage";
 
 export default [
   {
@@ -33,9 +33,9 @@ export default [
   //   component: TestLab
   // },
   {
-    path: "/blog-overview",
-    layout: DefaultLayout,
-    component: BlogOverview
+    path: "/SignUp",
+    layout: nonDefaultLayout,
+    component: SignUpPage
   },
   {
     path: "/user-profile-lite",
