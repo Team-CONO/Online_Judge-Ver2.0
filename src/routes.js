@@ -14,6 +14,7 @@ import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 // import TestLab from "./views/TestLab";
 import Login from "./views/Login";
+import Main from './views/Main';
 
 export default [
   {
@@ -22,11 +23,11 @@ export default [
     layout: DefaultLayout,
     component: () => <Redirect to="/Login" />
   },
-  // {
-  //   path: '/test-lab',
-  //   layout: nonDefaultLayout,
-  //   component: TestLab
-  // },
+  {
+    path: '/Main',
+    layout: DefaultLayout,
+    component: Main
+  },
   {
     path:"/Login",
     layout: nonDefaultLayout,

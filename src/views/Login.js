@@ -19,31 +19,51 @@ class Login extends Component {
     constructor(props){
         super(props);
         fire();
-        // this.state={
-        //     email:'',
-        //     password:''
-        // }
+        this.state={
+            email:'',
+            password:'',
+            islogin:false
+        }
     }
     handleSubmit=(e)=>{
-        //e.preventDefault();
+        e.preventDefault();
+        if(!this.state.email || !this.state.password)
+        {
+            alert('빈칸을 채워주세요!');
+        }
+        console.log("Click!");
+        try{
+            firebase
+            .auth()
+            .signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then(res=>{
+                if(res.user) this.props.history.push('/Main')
+                else alert('가입된 계정이 아닙니다...')
+            })
+        }catch(e){
+            alert(e);
+        }
+    }
+    handleGoogleSubmit(){
         console.log("Click!");
         try{
             const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
             firebase
             .auth()
             .signInWithPopup(googleAuthProvider)
-            .then(alert('wwwwwwwwwwwelcome!'));
+            .then(res=>{
+                if(res.user) this.props.history.push('/Main')
+            })
         }catch(e){
             alert(e);
         }
-
     }
-    // handleChange=(e)=>{
-    //     this.setState({
-    //         [e.target.name]:e.target.value
-    //     })
-    //     console.log(this.state)
-    // }
+    handleChange=(e)=>{
+        this.setState({
+            [e.target.name]:e.target.value
+        })
+        console.log(this.state)
+    }
     render() {
         return (
             <Container fluid className = "error__content">
@@ -59,9 +79,8 @@ class Login extends Component {
                             <h3>Sign to Nextop!</h3>
                             </CardHeader>
 
-                            <CardBody>
-                                <GoogleLoginButton onClick={() => this.handleSubmit()} />
-                                {/* <Form onSubmit={this.handleSubmit}>
+                            <CardBody>                                
+                                <Form onSubmit={this.handleSubmit}>
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#Email">이메일</label>
                                         <FormInput 
@@ -87,16 +106,20 @@ class Login extends Component {
                                             로그인
                                         </Button>
                                     </FormGroup>
-                                </Form> */}
+                                </Form>
                             </CardBody>
                         </Card>
-                    </Col>
+                    </Col>                    
                 </Row>
-                {/* <Row className="page-bottom py-5">
-                    <Col >
+                <Row className="page-bottom py-5">
+                    <div className = "error__content" ><h6>혹은</h6></div>
+                    <GoogleLoginButton onClick={() => this.handleGoogleSubmit()} />
+                </Row>
+                <Row>
+                    <Col>
                         <Button outline type="submit">넥스탑에 가입</Button>
                     </Col>
-                </Row> */}
+                </Row>
             </Container>
         );
     }
