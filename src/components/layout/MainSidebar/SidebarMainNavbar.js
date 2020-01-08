@@ -27,7 +27,7 @@ class SidebarMainNavbar extends React.Component {
         >
           <NavbarBrand
             className="w-100 mr-0"
-            href="/"
+            href="/Main"
             style={{ lineHeight: "25px" }}
           >
             <div className="d-table m-auto">
@@ -36,7 +36,7 @@ class SidebarMainNavbar extends React.Component {
                 className="d-inline-block align-top mr-1"
                 style={{ maxWidth: "150px" }}
                 src={require("../../../images/logo.png")}
-                alt="Shards Dashboard"
+                alt="Nextop Algorithm"
               />
               {/* {!hideLogoText && (
                 <span className="d-none d-md-inline ml-1">
