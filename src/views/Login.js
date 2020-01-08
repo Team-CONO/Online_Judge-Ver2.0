@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { 
-    Container,
     Row,
     Col,
     Form,
@@ -66,7 +65,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <Row className="page-header py-3">
+                <Row className="page-header py-4">
                     <Col>
                         <Link to="/"><img src={ logo }/></Link>
                     </Col>            
@@ -89,7 +88,7 @@ class Login extends Component {
                                             onChange={this.handleChange}
                                         />
                                     </FormGroup>
-
+                                    
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#password">비밀번호</label>
                                         <FormInput

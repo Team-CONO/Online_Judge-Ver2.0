@@ -23,7 +23,6 @@ class SignUpPage extends Component {
     handleSubmit=(e)=>{
         e.preventDefault();
         console.log("Click!");
-        console.log(this.state)
     }
     handleChange=(e)=>{
         this.setState({
@@ -33,7 +32,7 @@ class SignUpPage extends Component {
     }
     render() {
         return (
-            <Container fluid className = "error__content">
+            <div>
                 <Row className="page-header py-4">
                     <Col>
                         <Link to="/"><img src={ logo }/></Link>
@@ -41,13 +40,12 @@ class SignUpPage extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <Card style = {{maxWidth:"500px"}}>
+                        <Card>
                             <CardHeader className = "border-bottom">
-                            <h3>Sign up for Nextop</h3>
+                            <h3 className='m-0'>넥스탑에 회원가입</h3>
                             </CardHeader>
 
                             <CardBody>
-
                                 <Form onSubmit={this.handleSubmit}>
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#username">닉네임</label>
@@ -78,7 +76,6 @@ class SignUpPage extends Component {
                                             onChange={this.handleChange}
                                         />
                                     </FormGroup>
-
                                 </Form>
                             </CardBody>
                         </Card>
@@ -91,7 +88,7 @@ class SignUpPage extends Component {
                         </Col>
                     </Row>
                 </Form>
-            </Container>
+            </div>
         );
     }
 }
