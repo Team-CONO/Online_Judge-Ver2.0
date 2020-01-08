@@ -37,7 +37,7 @@ class Login extends Component {
             .signInWithEmailAndPassword(this.state.email, this.state.password)
             .then(res=>{
                 if(res.user) this.props.history.push('/Main')
-                else alert('가입된 계정이 아닙니다...')
+                else if(!res.user) alert('가입된 계정이 아닙니다...')
             })
         }catch(e){
             alert(e);
@@ -65,7 +65,7 @@ class Login extends Component {
     }
     render() {
         return (
-            <Container fluid className = "error__content">
+            <div>
                 <Row className="page-header py-3">
                     <Col>
                         <Link to="/"><img src={ logo }/></Link>
@@ -73,16 +73,16 @@ class Login extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <Card style = {{maxWidth:"500px"}}>
+                        <Card>
                             <CardHeader className = "border-bottom">
-                            <h4>넥스탑에 로그인</h4>
+                            <h3 className='m-0'>넥스탑에 로그인</h3>
                             </CardHeader>
 
                             <CardBody>                                
                                 <Form onSubmit={this.handleSubmit}>
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#Email">이메일</label>
-                                        <FormInput 
+                                        <FormInput
                                             type="email"
                                             name="email"
                                             placeholder="Email"                                            
@@ -92,7 +92,7 @@ class Login extends Component {
 
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#password">비밀번호</label>
-                                        <FormInput 
+                                        <FormInput
                                             type="password"
                                             name="password"
                                             placeholder="Password" 
@@ -100,22 +100,21 @@ class Login extends Component {
                                         />
                                     </FormGroup>
                                     
-                                    <FormGroup className="mb-0" >
-                                        <Button outline type="submit">회원가입</Button>
-                                        OR
-                                        <Button theme="success" type="submit">
+                                    <FormGroup className="mt-4 mb-0" >                                    
+                                        <Button className='btn-block' theme="success" type="submit">
                                             로그인
                                         </Button>
+                                        <div className='mt-3'><Link to='/SignUp'>넥스탑에 처음이신가요?</Link></div>
                                     </FormGroup>
                                 </Form>
                             </CardBody>
                         </Card>
                     </Col>                    
                 </Row>
-                <Row className="page-bottom py-4">
-                    <GoogleButton style={{maxWidth:"50px"}} onClick={() => this.handleGoogleSubmit()} />
+                <Row className="m-5">
+                    <GoogleButton label='구글계정으로 로그인' onClick={() => this.handleGoogleSubmit()} />
                 </Row>
-            </Container>
+            </div>
         );
     }
 }
