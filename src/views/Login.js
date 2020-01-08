@@ -13,7 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import firebase, { fire } from '../Firebase';
-import { GoogleLoginButton  } from "react-social-login-buttons";
+import GoogleButton from 'react-google-button'
 
 class Login extends Component {
     constructor(props){
@@ -22,7 +22,6 @@ class Login extends Component {
         this.state={
             email:'',
             password:'',
-            islogin:false
         }
     }
     handleSubmit=(e)=>{
@@ -67,7 +66,7 @@ class Login extends Component {
     render() {
         return (
             <Container fluid className = "error__content">
-                <Row className="page-header py-5">
+                <Row className="page-header py-3">
                     <Col>
                         <Link to="/"><img src={ logo }/></Link>
                     </Col>            
@@ -76,7 +75,7 @@ class Login extends Component {
                     <Col>
                         <Card style = {{maxWidth:"500px"}}>
                             <CardHeader className = "border-bottom">
-                            <h3>Sign to Nextop!</h3>
+                            <h4>넥스탑에 로그인</h4>
                             </CardHeader>
 
                             <CardBody>                                
@@ -101,7 +100,9 @@ class Login extends Component {
                                         />
                                     </FormGroup>
                                     
-                                    <FormGroup className="mb-0 text-center">
+                                    <FormGroup className="mb-0" >
+                                        <Button outline type="submit">회원가입</Button>
+                                        OR
                                         <Button theme="success" type="submit">
                                             로그인
                                         </Button>
@@ -111,14 +112,8 @@ class Login extends Component {
                         </Card>
                     </Col>                    
                 </Row>
-                <Row className="page-bottom py-5">
-                    <div className = "error__content" ><h6>혹은</h6></div>
-                    <GoogleLoginButton onClick={() => this.handleGoogleSubmit()} />
-                </Row>
-                <Row>
-                    <Col>
-                        <Button outline type="submit">넥스탑에 가입</Button>
-                    </Col>
+                <Row className="page-bottom py-4">
+                    <GoogleButton style={{maxWidth:"50px"}} onClick={() => this.handleGoogleSubmit()} />
                 </Row>
             </Container>
         );
