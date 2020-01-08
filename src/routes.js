@@ -15,6 +15,8 @@ import BlogPosts from "./views/BlogPosts";
 // import TestLab from "./views/TestLab";
 import Login from "./views/Login";
 import Main from './views/Main';
+import SignUpPage from "./views/SignUpPage";
+
 
 export default [
   {
@@ -27,6 +29,11 @@ export default [
     path: '/Main',
     layout: DefaultLayout,
     component: Main
+  },
+  {
+    path: "/SignUp",
+    layout: nonDefaultLayout,
+    component: SignUpPage
   },
   {
     path:"/Login",
