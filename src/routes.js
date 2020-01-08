@@ -5,7 +5,6 @@ import { Redirect } from "react-router-dom";
 import { DefaultLayout, nonDefaultLayout } from "./layouts";
 
 // Route Views
-import BlogOverview from "./views/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
 import AddNewPost from "./views/AddNewPost";
 import Errors from "./views/Errors";
@@ -16,7 +15,6 @@ import BlogPosts from "./views/BlogPosts";
 import Login from "./views/Login";
 import Main from './views/Main';
 import SignUpPage from "./views/SignUpPage";
-
 
 export default [
   {
@@ -41,9 +39,9 @@ export default [
     component: Login
   },
   {
-    path: "/blog-overview",
-    layout: DefaultLayout,
-    component: BlogOverview
+    path: "/SignUp",
+    layout: nonDefaultLayout,
+    component: SignUpPage
   },
   {
     path: "/user-profile-lite",
