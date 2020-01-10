@@ -110,9 +110,11 @@ class Login extends Component {
                         </Card>
                     </Col>                    
                 </Row>
+                {
                 <Row className="m-5">
                     <GoogleButton label='구글계정으로 로그인' onClick={() => this.handleGoogleSubmit()} />
                 </Row>
+                }
             </div>
         );
     }

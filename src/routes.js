@@ -29,11 +29,6 @@ export default [
     component: Main
   },
   {
-    path: "/SignUp",
-    layout: nonDefaultLayout,
-    component: SignUpPage
-  },
-  {
     path:"/Login",
     layout: nonDefaultLayout,
     component: Login
