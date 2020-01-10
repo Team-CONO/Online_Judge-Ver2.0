@@ -1,21 +1,21 @@
 export default function() {
   return [
     {
-      title: 'TEST',
-      to: '/',
-      htmlBefore: '',
+      title: 'E',
+      to: '/E',
+      htmlBefore: '<i class="material-icons">emoji_people</i>',
       htmlAfter: ''
     },
     {
-      title: 'TEST2',
-      to: '/',
-      htmlBefore: '',
+      title: 'M',
+      to: '/M',
+      htmlBefore: '<i class="material-icons">edit</i>',
       htmlAfter: ''
     },
     {
-      title: 'TEST3',
-      to: '/',
-      htmlBefore: '',
+      title: 'H',
+      to: '/H',
+      htmlBefore: '<i class="material-icons">school</i>',
       htmlAfter: ''
     },
     // {

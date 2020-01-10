@@ -28,6 +28,7 @@ class Login extends Component {
         if(!this.state.email || !this.state.password)
         {
             alert('빈칸을 채워주세요!');
+            return;
         }
         console.log("Click!");
         try{
@@ -36,8 +37,10 @@ class Login extends Component {
             .signInWithEmailAndPassword(this.state.email, this.state.password)
             .then(res=>{
                 if(res.user) this.props.history.push('/Main')
-                else if(!res.user) alert('가입된 계정이 아닙니다...')
             })
+            .catch((e) => {
+                alert(e)
+            });
         }catch(e){
             alert(e);
         }
