@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from "shards-react";
-import firebase from '../Firebase'
+import firebase, { fire } from '../Firebase';
 
 class Main extends Component {
     async componentDidMount(){
-        try {
-            await firebase.auth().currentUser;
-            console.log(firebase.auth().currentUser.email);
-        } catch (error) {
-            console.log(error)
-        }
+        await fire()
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // User is signed in.
+              console.log('O');
+              
+            } else {
+              // No user is signed in.
+              console.log('X')
+            }
+        });
     }
     render() {
         return (

@@ -42,7 +42,7 @@ class Login extends Component {
                 alert(e)
             });
         }catch(e){
-            alert(e);
+            alert(e.message);
         }
     }
     handleGoogleSubmit(){
@@ -56,7 +56,7 @@ class Login extends Component {
                 if(res.user) this.props.history.push('/Main')
             })
         }catch(e){
-            alert(e);
+            alert(e.code);
         }
     }
     handleChange=(e)=>{
