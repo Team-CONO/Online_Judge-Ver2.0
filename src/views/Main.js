@@ -1,27 +1,22 @@
+/* eslint-disable no-restricted-globals */
 import React, { Component } from 'react';
 import { Container, Row, Col } from "shards-react";
 import firebase, { fire } from '../Firebase';
 
 class Main extends Component {
-    async componentDidMount(){
+    async componentWillMount(){
         await fire()
-
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-              // User is signed in.
-              console.log('O');
-              
-            } else {
-              // No user is signed in.
-              console.log('X')
-            }
+        await firebase.auth().onAuthStateChanged(function(user) {
+            user
+            ? console.log(user.email)
+            : location.href='/'
         });
     }
     render() {
         return (
             <Container>
                 <Row>
-                    <Col>Main Page!</Col>
+                    <Col></Col>
                 </Row>
             </Container>
         );
