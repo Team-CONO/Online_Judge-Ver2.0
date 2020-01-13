@@ -10,18 +10,42 @@ import {
     CardHeader,
     CardBody, } from "shards-react";
 import { Link } from 'react-router-dom';
+import firebase, { fire } from '../Firebase';
 import logo from '../images/logo.png'
 
 // eslint-disable-next-line no-unused-vars
 class SignUpPage extends Component {
-    state={
-        username:'',
-        email:'',
-        password:''
+    constructor(props){
+        super(props);
+        fire();
+        this.state={
+            username:'',
+            email:'',
+            password:''
+        }
     }
     handleSubmit=(e)=>{
         e.preventDefault();
+        if(!this.state.email || !this.state.password || !this.state.username)
+        {
+            alert('빈칸을 채워주세요!');
+            return;
+        }
         console.log("Click!");
+        firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email,this.state.password)
+        .then(res=>{
+            if(res.user) 
+            {
+                alert('회원이 되신것을 환영합니다!')
+                this.props.history.push('/')
+            }
+
+        })
+        .catch((e) => {
+            alert(e)
+        });
     }
     handleChange=(e)=>{
         this.setState({
@@ -83,7 +107,7 @@ class SignUpPage extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Row className="page-bottom py-5">
                         <Col >
-                            <Button outline type="submit">Sign up</Button>
+                            <Button outline type="submit">회원 가입</Button>
                         </Col>
                     </Row>
                 </Form>
