@@ -18,6 +18,12 @@ export default function() {
       htmlBefore: '<i class="material-icons">school</i>',
       htmlAfter: ''
     },
+    {
+      title: '경시대회',
+      to: '/other',
+      htmlBefore: '<i class="material-icons">public</i>',
+      htmlAfter: ''
+    }
     // {
     //   title: "Blog Dashboard",
     //   to: "/blog-overview",

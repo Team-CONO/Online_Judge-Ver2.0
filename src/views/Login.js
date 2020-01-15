@@ -39,7 +39,7 @@ class Login extends Component {
                 if(res.user) this.props.history.push('/Main')
             })
             .catch((e) => {
-                alert(e)
+                console.log(e)
             });
         }catch(e){
             alert(e.message);
