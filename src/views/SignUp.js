@@ -44,7 +44,17 @@ class SignUpPage extends Component {
 
         })
         .catch((e) => {
-            alert(e)
+            switch (e.code) {
+                case 'auth/email-already-in-use':
+                    alert('이미 가입된 계정입니다');
+                    break;
+                case 'auth/weak-password':
+                    alert('비밀번호는 최소 6자리 이상입니다');
+                    break;
+                default:
+                    alert(e);
+                    break;
+            }
         });
     }
     handleChange=(e)=>{

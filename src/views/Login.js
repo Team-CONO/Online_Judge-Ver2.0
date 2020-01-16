@@ -39,7 +39,17 @@ class Login extends Component {
                 if(res.user) this.props.history.push('/Main')
             })
             .catch((e) => {
-                console.log(e)
+                switch (e.code) {
+                    case 'auth/wrong-password':
+                        alert('비밀번호가 틀렸습니다');
+                        break;
+                    case 'auth/user-not-found':
+                        alert('등록된 계정이 아닙니다');
+                        break;
+                    default:
+                        alert(e)
+                        break;
+                }
             });
         }catch(e){
             alert(e.message);
