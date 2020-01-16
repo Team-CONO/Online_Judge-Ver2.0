@@ -12,14 +12,16 @@ class Main extends Component {
                 alert('비정상적인 접근입니다!')
                 location.href='/'
             }
-            else console.log(user.email)
         });
     }
     render() {
         return (
             <Container fluid className="main-content-container px-4 pb-4">
                 <div className="error">
-                <div className="error__content">                                       
+                <div className="error__content">
+                    <h2>Hello World!</h2>
+                    <h3>넥스탑 문제풀이 사이트 입니다</h3>
+                    <p>문제 열람 관련해선 담당 선생님께 문의 바랍니다</p>
                 </div>
                 </div>
             </Container>
