@@ -2,25 +2,25 @@ export default function() {
   return [
     {
       title: 'E',
-      to: '/E',
+      to: '/Main/E',
       htmlBefore: '<i class="material-icons">emoji_people</i>',
       htmlAfter: ''
     },
     {
       title: 'M',
-      to: '/M',
+      to: '/Main/M',
       htmlBefore: '<i class="material-icons">edit</i>',
       htmlAfter: ''
     },
     {
       title: 'H',
-      to: '/H',
+      to: '/Main/H',
       htmlBefore: '<i class="material-icons">school</i>',
       htmlAfter: ''
     },
     {
       title: '경시대회',
-      to: '/other',
+      to: '/Main/other',
       htmlBefore: '<i class="material-icons">public</i>',
       htmlAfter: ''
     }

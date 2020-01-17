@@ -31,14 +31,6 @@ export default class UserActions extends React.Component {
       }
     });
   }
-  componentWillUnmount(){
-     firebase.auth().signOut().then(function() {
-      // Sign-out successful.
-    }).catch(function(error) {
-      // An error happened.
-      alert(error)
-    });
-  }
 
   toggleUserActions() {
     this.setState({
@@ -55,6 +47,10 @@ export default class UserActions extends React.Component {
     });
   }
 
+  click(){
+    alert('현재 준비중입니다');
+  }
+
   render() {
     return (
       <NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
@@ -67,7 +63,7 @@ export default class UserActions extends React.Component {
           <span className="d-none d-md-inline-block">{this.state.username}</span>
         </DropdownToggle>
         <Collapse tag={DropdownMenu} open={this.state.visible}>
-          <DropdownItem tag={Link} to="/Main">
+          <DropdownItem tag={Link} to="/Main" onClick={this.click}>
             <i className="material-icons">&#xE7FD;</i> 프로필
           </DropdownItem>
           <DropdownItem divider />
