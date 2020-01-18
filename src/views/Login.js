@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { 
+import {
     Row,
     Col,
     Form,
@@ -8,70 +8,70 @@ import {
     Button,
     Card,
     CardHeader,
-    CardBody, } from "shards-react";
+    CardBody,
+} from "shards-react";
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import firebase, { fire } from '../Firebase';
 import GoogleButton from 'react-google-button'
 
 class Login extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         fire();
-        this.state={
-            email:'',
-            password:'',
-        }
+        this.state = ({
+            email: '',
+            password: '',
+        })
     }
-    handleSubmit=(e)=>{
+    handleSubmit = (e) => {
         e.preventDefault();
-        if(!this.state.email || !this.state.password)
-        {
+        if (!this.state.email || !this.state.password) {
             alert('빈칸을 채워주세요!');
             return;
         }
         console.log("Click!");
-        try{
+        try {
             firebase
-            .auth()
-            .signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then(res=>{
-                if(res.user) this.props.history.push('/Main')
-            })
-            .catch((e) => {
-                switch (e.code) {
-                    case 'auth/wrong-password':
-                        alert('비밀번호가 틀렸습니다');
-                        break;
-                    case 'auth/user-not-found':
-                        alert('등록된 계정이 아닙니다');
-                        break;
-                    default:
-                        alert(e)
-                        break;
-                }
-            });
-        }catch(e){
+                .auth()
+                .signInWithEmailAndPassword(this.state.email, this.state.password)
+                .then(res => {
+                    if (res.user) this.props.history.push('/Main')
+                })
+                .catch((e) => {
+                    switch (e.code) {
+                        case 'auth/wrong-password':
+                            alert('비밀번호가 틀렸습니다');
+                            break;
+                        case 'auth/user-not-found':
+                            alert('등록된 계정이 아닙니다');
+                            break;
+                        default:
+                            alert(e)
+                            break;
+                    }
+                });
+        } catch (e) {
             alert(e.message);
         }
     }
-    handleGoogleSubmit(){
+    handleGoogleSubmit() {
         console.log("Click!");
-        try{
+        try {
             const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
             firebase
-            .auth()
-            .signInWithPopup(googleAuthProvider)
-            .then(res=>{
-                if(res.user) this.props.history.push('/Main')
-            })
-        }catch(e){
+                .auth()
+                .signInWithPopup(googleAuthProvider)
+                .then(res => {
+                    if (res.user) this.props.history.push('/Main')
+                })
+        } catch (e) {
             alert(e.code);
         }
     }
-    handleChange=(e)=>{
+    handleChange = (e) => {
         this.setState({
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
         console.log(this.state)
     }
@@ -80,39 +80,39 @@ class Login extends Component {
             <div>
                 <Row className="page-header py-4">
                     <Col>
-                        <Link to="/"><img src={ logo }/></Link>
-                    </Col>            
+                        <Link to="/"><img src={logo} /></Link>
+                    </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Card>
-                            <CardHeader className = "border-bottom">
-                            <h3 className='m-0'>넥스탑에 로그인</h3>
+                            <CardHeader className="border-bottom">
+                                <h3 className='m-0'>넥스탑에 로그인</h3>
                             </CardHeader>
 
-                            <CardBody>                                
+                            <CardBody>
                                 <Form onSubmit={this.handleSubmit}>
-                                    <FormGroup className = "text-left">
+                                    <FormGroup className="text-left">
                                         <label htmlFor="#Email">이메일</label>
                                         <FormInput
                                             type="email"
                                             name="email"
-                                            placeholder="Email"                                            
+                                            placeholder="Email"
                                             onChange={this.handleChange}
                                         />
                                     </FormGroup>
-                                    
-                                    <FormGroup className = "text-left">
+
+                                    <FormGroup className="text-left">
                                         <label htmlFor="#password">비밀번호</label>
                                         <FormInput
                                             type="password"
                                             name="password"
-                                            placeholder="Password" 
+                                            placeholder="Password"
                                             onChange={this.handleChange}
                                         />
                                     </FormGroup>
-                                    
-                                    <FormGroup className="mt-4 mb-0" >                                    
+
+                                    <FormGroup className="mt-4 mb-0" >
                                         <Button className='btn-block' theme="success" type="submit">
                                             로그인
                                         </Button>
@@ -121,12 +121,12 @@ class Login extends Component {
                                 </Form>
                             </CardBody>
                         </Card>
-                    </Col>                    
+                    </Col>
                 </Row>
                 {
-                <Row className="m-5">
-                    <GoogleButton label='구글계정으로 로그인' onClick={() => this.handleGoogleSubmit()} />
-                </Row>
+                    <Row className="m-5">
+                        <GoogleButton label='구글계정으로 로그인' onClick={() => this.handleGoogleSubmit()} />
+                    </Row>
                 }
             </div>
         );
