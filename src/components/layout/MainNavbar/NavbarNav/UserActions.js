@@ -26,7 +26,7 @@ export default class UserActions extends React.Component {
     await firebase.auth().onAuthStateChanged((user)=> {
       if(user){
         this.setState({
-          username:user.email
+          username:user.displayName
         });
       }
     });

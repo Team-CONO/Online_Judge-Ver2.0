@@ -38,6 +38,9 @@ class SignUpPage extends Component {
         .then(res=>{
             if(res.user) 
             {
+                res.user.updateProfile({
+                    displayName:this.state.username
+                })
                 alert('회원이 되신것을 환영합니다!')
                 this.props.history.push('/')
             }
@@ -83,7 +86,7 @@ class SignUpPage extends Component {
                                     <FormGroup className = "text-left">
                                         <label htmlFor="#username">닉네임</label>
                                         <FormInput 
-                                            type="username" 
+                                            type="text" 
                                             name="username"
                                             placeholder="UserName" 
                                             onChange={this.handleChange}

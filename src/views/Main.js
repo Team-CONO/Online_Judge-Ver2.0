@@ -17,7 +17,7 @@ class Main extends Component {
                 alert('비정상적인 접근입니다!')
                 location.href = '/'
             }
-            else console.log(user.displayName)
+            else console.log(user)
         });
     }
     render() {
