@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     Row,
     Col,
@@ -8,21 +8,18 @@ import {
     Button,
     Card,
     CardHeader,
-    CardBody,
+    CardBody
 } from "shards-react";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import logo from '../images/logo.png';
-import firebase, { fire } from '../Firebase';
+import firebase, {fire} from '../Firebase';
 import GoogleButton from 'react-google-button'
 
 class Login extends Component {
     constructor(props) {
         super(props);
         fire();
-        this.state = ({
-            email: '',
-            password: '',
-        })
+        this.state = ({email: '', password: ''});
     }
     handleSubmit = (e) => {
         e.preventDefault();
@@ -36,8 +33,12 @@ class Login extends Component {
                 .auth()
                 .signInWithEmailAndPassword(this.state.email, this.state.password)
                 .then(res => {
-                    if (res.user) this.props.history.push('/Main')
-                })
+                    if (res.user) 
+                        this
+                            .props
+                            .history
+                            .push('/Main')
+                    })
                 .catch((e) => {
                     switch (e.code) {
                         case 'auth/wrong-password':
@@ -58,13 +59,19 @@ class Login extends Component {
     handleGoogleSubmit() {
         console.log("Click!");
         try {
-            const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+            const googleAuthProvider = new firebase
+                .auth
+                .GoogleAuthProvider();
             firebase
                 .auth()
                 .signInWithPopup(googleAuthProvider)
                 .then(res => {
-                    if (res.user) this.props.history.push('/Main')
-                })
+                    if (res.user) 
+                        this
+                            .props
+                            .history
+                            .push('/Main')
+                    })
         } catch (e) {
             alert(e.code);
         }
@@ -80,7 +87,7 @@ class Login extends Component {
             <div>
                 <Row className="page-header py-4">
                     <Col>
-                        <Link to="/"><img src={logo} /></Link>
+                        <Link to="/"><img src={logo}/></Link>
                     </Col>
                 </Row>
                 <Row>
@@ -98,8 +105,7 @@ class Login extends Component {
                                             type="email"
                                             name="email"
                                             placeholder="Email"
-                                            onChange={this.handleChange}
-                                        />
+                                            onChange={this.handleChange}/>
                                     </FormGroup>
 
                                     <FormGroup className="text-left">
@@ -108,15 +114,16 @@ class Login extends Component {
                                             type="password"
                                             name="password"
                                             placeholder="Password"
-                                            onChange={this.handleChange}
-                                        />
+                                            onChange={this.handleChange}/>
                                     </FormGroup>
 
-                                    <FormGroup className="mt-4 mb-0" >
+                                    <FormGroup className="mt-4 mb-0">
                                         <Button className='btn-block' theme="success" type="submit">
                                             로그인
                                         </Button>
-                                        <div className='mt-3'><Link to='/SignUp'>넥스탑에 처음이신가요?</Link></div>
+                                        <div className='mt-3'>
+                                            <Link to='/SignUp'>넥스탑에 처음이신가요?</Link>
+                                        </div>
                                     </FormGroup>
                                 </Form>
                             </CardBody>
@@ -125,8 +132,8 @@ class Login extends Component {
                 </Row>
                 {
                     <Row className="m-5">
-                        <GoogleButton label='구글계정으로 로그인' onClick={() => this.handleGoogleSubmit()} />
-                    </Row>
+                            <GoogleButton label='구글계정으로 로그인' onClick={() => this.handleGoogleSubmit()}/>
+                        </Row>
                 }
             </div>
         );

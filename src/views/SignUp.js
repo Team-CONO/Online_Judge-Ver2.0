@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     Row,
     Col,
@@ -8,10 +8,10 @@ import {
     Button,
     Card,
     CardHeader,
-    CardBody,
+    CardBody
 } from "shards-react";
-import { Link } from 'react-router-dom';
-import firebase, { fire } from '../Firebase';
+import {Link} from 'react-router-dom';
+import firebase, {fire} from '../Firebase';
 import logo from '../images/logo.png'
 
 // eslint-disable-next-line no-unused-vars
@@ -19,11 +19,7 @@ class SignUpPage extends Component {
     constructor(props) {
         super(props);
         fire();
-        this.state = ({
-            username: '',
-            email: '',
-            password: ''
-        })
+        this.state = ({username: '', email: '', password: ''});
     }
     handleSubmit = (e) => {
         e.preventDefault();
@@ -37,11 +33,14 @@ class SignUpPage extends Component {
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(res => {
                 if (res.user) {
-                    res.user.updateProfile({
-                        displayName: this.state.username
-                    })
+                    res
+                        .user
+                        .updateProfile({displayName: this.state.username})
                     alert('회원이 되신것을 환영합니다!')
-                    this.props.history.push('/')
+                    this
+                        .props
+                        .history
+                        .push('/')
                 }
 
             })
@@ -70,7 +69,7 @@ class SignUpPage extends Component {
             <div>
                 <Row className="page-header py-4">
                     <Col>
-                        <Link to="/"><img src={logo} /></Link>
+                        <Link to="/"><img src={logo}/></Link>
                     </Col>
                 </Row>
                 <Row>
@@ -88,8 +87,7 @@ class SignUpPage extends Component {
                                             type="text"
                                             name="username"
                                             placeholder="UserName"
-                                            onChange={this.handleChange}
-                                        />
+                                            onChange={this.handleChange}/>
                                     </FormGroup>
 
                                     <FormGroup className="text-left">
@@ -98,8 +96,7 @@ class SignUpPage extends Component {
                                             type="email"
                                             name="email"
                                             placeholder="Email"
-                                            onChange={this.handleChange}
-                                        />
+                                            onChange={this.handleChange}/>
                                     </FormGroup>
 
                                     <FormGroup className="text-left">
@@ -108,8 +105,7 @@ class SignUpPage extends Component {
                                             type="password"
                                             name="password"
                                             placeholder="Password"
-                                            onChange={this.handleChange}
-                                        />
+                                            onChange={this.handleChange}/>
                                     </FormGroup>
                                 </Form>
                             </CardBody>
@@ -119,7 +115,7 @@ class SignUpPage extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Row className="page-bottom py-5">
                         <Col >
-                            <Button outline type="submit">회원 가입</Button>
+                            <Button outline="outline" type="submit">회원 가입</Button>
                         </Col>
                     </Row>
                 </Form>
