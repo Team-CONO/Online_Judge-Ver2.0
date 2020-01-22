@@ -53,11 +53,11 @@ export default [
   //   layout: DefaultLayout,
   //   component: AddNewPost
   // },
-  // {
-  //   path: "/errors",
-  //   layout: DefaultLayout,
-  //   component: Errors
-  // },
+  {
+    path: "/errors",
+    layout: nonDefaultLayout,
+    component: Errors
+  },
   // {
   //   path: "/components-overview",
   //   layout: DefaultLayout,
