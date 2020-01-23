@@ -29,11 +29,6 @@ export default [
     component: Main
   },
   {
-    path: '/Main/:level',
-    layout: DefaultLayout,
-    component: Main
-  },
-  {
     path:"/Login",
     layout: nonDefaultLayout,
     component: Login

@@ -27,7 +27,6 @@ class SignUpPage extends Component {
             alert('빈칸을 채워주세요!');
             return;
         }
-        console.log("Click!");
         firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -62,7 +61,6 @@ class SignUpPage extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
-        console.log(this.state)
     }
     render() {
         return (

@@ -27,7 +27,6 @@ class Login extends Component {
             alert('빈칸을 채워주세요!');
             return;
         }
-        console.log("Click!");
         try {
             firebase
                 .auth()
@@ -57,7 +56,6 @@ class Login extends Component {
         }
     }
     handleGoogleSubmit() {
-        console.log("Click!");
         try {
             const googleAuthProvider = new firebase
                 .auth
@@ -80,7 +78,6 @@ class Login extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
-        console.log(this.state)
     }
     render() {
         return (
