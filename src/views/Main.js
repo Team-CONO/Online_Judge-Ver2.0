@@ -15,21 +15,11 @@ class Main extends Component {
     constructor(props) {
         super(props)
         fire()
-        this.state = ({islogIn: true, string: ''})
+        this.state = ({islogIn: false, string: ''})
     }
     static getDerivedStateFromProps(nextProps, prevState) {
-        firebase
-            .auth()
-            .onAuthStateChanged(user => {
-                if (!user) {
-                    alert('비정상적인 접근입니다!')
-                    nextProps
-                        .history
-                        .push('/')
-                }
-            });
         const location = nextProps.location.pathname;
-        if (location === '/Main') {
+        if (location === '/Main' && prevState.islogIn) {
             return {
                 string: <div className="error">
                         <div className="error__content">
@@ -39,9 +29,28 @@ class Main extends Component {
                         </div>
                     </div>
             }
+        } else if (!prevState.islogIn) {
+            return {string: null}
+
         } else {
             return {string: <Tables level={location}/>}
         }
+    }
+    componentDidMount() {
+        firebase
+            .auth()
+            .onAuthStateChanged(user => {
+                if (!user) {
+                    this.setState({islogIn: false})
+                    alert('비정상적인 접근입니다!')
+                    this
+                        .props
+                        .history
+                        .push('/')
+                } else {
+                    this.setState({islogIn: true})
+                }
+            });
     }
     render() {
         return (
