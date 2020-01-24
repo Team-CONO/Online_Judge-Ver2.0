@@ -54,7 +54,7 @@ class Main extends Component {
     }
     render() {
         return (
-            <Container fluid="fluid" className="main-content-container px-4 pb-4">
+            <Container fluid>
                 {this.state.string}
             </Container>
         );

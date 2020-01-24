@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/shards-dashboards.1.1.0.min.css";
 
 export default () => (
-  <Router basename={""}>
+  <Router basename={process.env.REACT_APP_BASENAME || ""}>
     <div>
       {routes.map((route, index) => {
         return (
