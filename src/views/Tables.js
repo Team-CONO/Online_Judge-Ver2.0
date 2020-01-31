@@ -8,7 +8,6 @@ import {
     CardBody
 } from "shards-react";
 import firebase, {fire} from '../Firebase'
-import {Link} from "react-router-dom";
 
 class Tables extends Component {
     constructor(props) {
@@ -18,8 +17,19 @@ class Tables extends Component {
     }
     componentDidMount() {
         firebase
+            .auth()
+            .onAuthStateChanged(user => {
+                if (!user) {
+                    alert('비정상적인 접근입니다!')
+                    this
+                        .props
+                        .history
+                        .push('/')
+                }
+            });
+        firebase
             .database()
-            .ref(this.props.level)
+            .ref('posts' + this.props.location.pathname)
             .once('value')
             .then(snapshot => {
                 snapshot.forEach(item => {
@@ -32,8 +42,8 @@ class Tables extends Component {
                 })
             });
     }
-    goto=()=> {
-        alert(this.props.level)
+    goto = () => {
+        alert('문제야 나와줘~')
     }
     render() {
         return (
@@ -66,7 +76,9 @@ class Tables extends Component {
                                                     onClick={this.goto}
                                                     style={{
                                                         cursor: 'pointer'
-                                                    }}>{title}</td>
+                                                    }}>
+                                                    <font color='blue'>{title}</font>
+                                                </td>
                                                 <td>어드민</td>
                                             </tr>
                                         )

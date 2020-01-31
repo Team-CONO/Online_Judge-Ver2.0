@@ -38,6 +38,26 @@ export default [
     layout: nonDefaultLayout,
     component: SignUp
   },
+  {
+    path: "/E",
+    layout: DefaultLayout,
+    component: Tables
+  },
+  {
+    path: "/M",
+    layout: DefaultLayout,
+    component: Tables
+  },
+  {
+    path: "/H",
+    layout: DefaultLayout,
+    component: Tables
+  },
+  {
+    path: "/other",
+    layout: DefaultLayout,
+    component: Tables
+  },
   // {
   //   path: "/user-profile-lite",
   //   layout: DefaultLayout,

@@ -9,7 +9,6 @@ import {
     CardHeader
 } from "shards-react";
 import firebase, {fire} from '../Firebase';
-import Tables from './Tables';
 
 class Main extends Component {
     constructor(props) {
@@ -31,9 +30,6 @@ class Main extends Component {
             }
         } else if (!prevState.islogIn) {
             return {string: null}
-
-        } else {
-            return {string: <Tables level={location}/>}
         }
     }
     componentDidMount() {
