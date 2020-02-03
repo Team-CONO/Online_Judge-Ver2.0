@@ -5,7 +5,8 @@ import {
     Col,
     Card,
     CardHeader,
-    CardBody
+    CardBody,
+    FormSelect
 } from "shards-react";
 import firebase, {fire} from '../Firebase'
 
@@ -30,8 +31,8 @@ class Admin_view extends Component {
         // firebase     .database()     .ref('posts' + this.props.location.pathname)
         // .once('value')     .then(snapshot => {         snapshot.forEach(item => {
         // this.setState({                 islevel: this                     .state
-        // .islevel                     .concat(item.val().title)             })
-        // })     });
+        // .islevel                     .concat(item.val().title)             }) })
+        // });
     }
     render() {
         return (
@@ -57,6 +58,19 @@ class Admin_view extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>test</td>
+                                        <td>
+                                            <FormSelect>
+                                                <option value="first">This is the first</option>
+                                                <option value="second">This is the second</option>
+                                                <option value="third" disabled="disabled">
+                                                    This option is disabled
+                                                </option>
+                                            </FormSelect>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </CardBody>
