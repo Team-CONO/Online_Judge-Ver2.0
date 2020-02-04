@@ -69,7 +69,16 @@ class Login extends Component {
                             .props
                             .history
                             .push('/Main')
-                    })
+                    firebase
+                        .database()
+                        .ref('accounts/' + res.user.uid)
+                        .set({email: res.user.email, name: res.user.displayName, role: 'Guest'})
+                        .catch((e) => {
+                            alert(e)
+                            console.log(e);
+
+                        });
+                })
         } catch (e) {
             alert(e.code);
         }

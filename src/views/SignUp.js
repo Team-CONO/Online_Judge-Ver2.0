@@ -40,6 +40,15 @@ class SignUpPage extends Component {
                         .props
                         .history
                         .push('/')
+                    firebase
+                        .database()
+                        .ref('accounts/' + res.user.uid)
+                        .set({email: this.state.email, name: this.state.username, role: 'Guest'})
+                        .catch((e) => {
+                            alert(e)
+                            console.log(e);
+
+                        });
                 }
 
             })
