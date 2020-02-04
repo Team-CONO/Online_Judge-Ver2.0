@@ -6,7 +6,12 @@ import {
     Card,
     CardHeader,
     CardBody,
-    FormSelect
+    FormSelect,
+    InputGroup,
+    FormInput,
+    Form,
+    InputGroupAddon,
+    InputGroupText
 } from "shards-react";
 import firebase, {fire} from '../Firebase'
 
@@ -52,6 +57,9 @@ class Admin_view extends Component {
             });
 
     }
+    handleChange = (e) => {
+        alert(e.target.value)
+    }
     render() {
         console.log(this.state.accounts);
         return (
@@ -61,6 +69,16 @@ class Admin_view extends Component {
                         <CardHeader className="border-bottom">
                             <h4 className="m-0">학생 관리</h4>
                         </CardHeader>
+                        <Form className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
+                            <InputGroup seamless size="lg" className="ml-3">
+                                <InputGroupAddon type="prepend">
+                                    <InputGroupText>
+                                        <i className="material-icons">search</i>
+                                    </InputGroupText>
+                                </InputGroupAddon>
+                                <FormInput className="navbar-search" placeholder="닉네임 조회"/>
+                            </InputGroup>
+                        </Form>
                         <CardBody className="p-0 pb-3">
                             <table className="table mb-0">
                                 <thead className="bg-light">
@@ -69,10 +87,10 @@ class Admin_view extends Component {
                                             #
                                         </th>
                                         <th scope="col" className="border-0">
-                                            회원명
+                                            닉네임
                                         </th>
                                         <th scope="col" className="border-0">
-                                            레벨
+                                            등급
                                         </th>
                                     </tr>
                                 </thead>
@@ -88,7 +106,14 @@ class Admin_view extends Component {
                                                         <td>
                                                             {acc.name}
                                                         </td>
-                                                        <td>{acc.role}</td>
+                                                        <td>
+                                                            <FormSelect onChange={this.handleChange}>
+                                                                <option value={index}>{acc.role}</option>
+                                                                <option value='Admin'>Admin</option>
+                                                                <option value='Student'>Student</option>
+                                                                <option value='Guest'>Guest</option>
+                                                            </FormSelect>
+                                                        </td>
                                                     </tr>
                                                 )
                                             })
