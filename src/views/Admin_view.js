@@ -14,7 +14,7 @@ class Admin_view extends Component {
     constructor(props) {
         super(props)
         fire()
-        this.state = ({islevel: []})
+        this.state = ({accounts: []})
     }
     componentDidMount() {
         firebase
@@ -28,13 +28,32 @@ class Admin_view extends Component {
                         .push('/')
                 }
             });
-        // firebase     .database()     .ref('posts' + this.props.location.pathname)
-        // .once('value')     .then(snapshot => {         snapshot.forEach(item => {
-        // this.setState({                 islevel: this                     .state
-        // .islevel                     .concat(item.val().title)             }) })
-        // });
+
+        firebase
+            .database()
+            .ref('accounts')
+            .once('value')
+            .then(snapshot => {
+                snapshot.forEach(item => {
+                    this.setState({
+                        accounts: this
+                            .state
+                            .accounts
+                            .concat({
+                                name: item
+                                    .val()
+                                    .name,
+                                role: item
+                                    .val()
+                                    .role
+                            })
+                    })
+                })
+            });
+
     }
     render() {
+        console.log(this.state.accounts);
         return (
             <Row>
                 <Col>
@@ -58,19 +77,22 @@ class Admin_view extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>test</td>
-                                        <td>
-                                            <FormSelect>
-                                                <option value="first">This is the first</option>
-                                                <option value="second">This is the second</option>
-                                                <option value="third" disabled="disabled">
-                                                    This option is disabled
-                                                </option>
-                                            </FormSelect>
-                                        </td>
-                                    </tr>
+                                    {
+                                        this
+                                            .state
+                                            .accounts
+                                            .map((acc, index) => {
+                                                return (
+                                                    <tr>
+                                                        <td>{index + 1}</td>
+                                                        <td>
+                                                            {acc.name}
+                                                        </td>
+                                                        <td>{acc.role}</td>
+                                                    </tr>
+                                                )
+                                            })
+                                    }
                                 </tbody>
                             </table>
                         </CardBody>
