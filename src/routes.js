@@ -15,13 +15,14 @@ import BlogPosts from "./views/BlogPosts";
 import Login from "./views/Login";
 import Main from './views/Main';
 import SignUp from "./views/SignUp";
+import Admin_Upload from "./views/Admin_Upload";
 
 export default [
   {
     path: "/",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/Login" />
+    component: () => <Redirect to="/Admin_Upload" />
   },
   {
     path: '/Main',
@@ -57,6 +58,11 @@ export default [
     path: "/other",
     layout: DefaultLayout,
     component: Tables
+  },
+  {
+    path: "/Admin_Upload",
+    layout: nonDefaultLayout,
+    component: Admin_Upload
   },
   // {
   //   path: "/user-profile-lite",
