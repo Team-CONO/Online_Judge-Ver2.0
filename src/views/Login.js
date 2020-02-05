@@ -78,7 +78,7 @@ class Login extends Component {
                                 firebase
                                     .database()
                                     .ref('accounts/' + res.user.uid)
-                                    .set({email: res.user.email, name: res.user.displayName, role: 'Guest'})
+                                    .set({email: res.user.email, name: res.user.displayName})
                                     .catch((e) => {
                                         alert(e)
                                         console.log(e);
