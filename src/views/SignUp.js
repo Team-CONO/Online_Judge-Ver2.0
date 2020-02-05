@@ -43,7 +43,7 @@ class SignUpPage extends Component {
                     firebase
                         .database()
                         .ref('accounts/' + res.user.uid)
-                        .set({email: this.state.email, name: this.state.username, role: 'Guest'})
+                        .set({email: this.state.email, name: this.state.username})
                         .catch((e) => {
                             alert(e)
                             console.log(e);
