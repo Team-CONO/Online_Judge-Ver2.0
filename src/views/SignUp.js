@@ -122,7 +122,7 @@ class SignUpPage extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Row className="page-bottom py-5">
                         <Col >
-                            <Button outline="outline" type="submit">회원 가입</Button>
+                            <Button outline type="submit">회원 가입</Button>
                         </Col>
                     </Row>
                 </Form>

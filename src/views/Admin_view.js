@@ -19,7 +19,7 @@ class Admin_view extends Component {
     constructor(props) {
         super(props)
         fire()
-        this.state = ({accounts: []})
+        this.state = ({accounts: [], islogIn: false})
     }
     componentDidMount() {
         firebase
@@ -31,9 +31,11 @@ class Admin_view extends Component {
                         .props
                         .history
                         .push('/')
+                    return
+                } else {
+                    this.setState({islogIn: true})
                 }
             });
-
         firebase
             .database()
             .ref('accounts')
@@ -58,72 +60,82 @@ class Admin_view extends Component {
 
     }
     handleChange = (e) => {
-        alert(e.target.value)
+        console.log(e.target.name);
+        // const account = firebase     .auth()     .currentUser; firebase .database()
+        // .ref('accounts/' + account.uid)     .set({email: account.email, name:
+        // account.displayName, role: e.target.value}) .then(alert('변경 완료!')) .catch((e)
+        // => {         alert(e) console.log(e);     });
     }
     render() {
-        console.log(this.state.accounts);
+        //console.log(this.state.accounts);
         return (
-            <Row>
-                <Col>
-                    <Card className="my-4 mx-5">
-                        <CardHeader className="border-bottom">
-                            <h4 className="m-0">학생 관리</h4>
-                        </CardHeader>
-                        <Form className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
-                            <InputGroup seamless size="lg" className="ml-3">
-                                <InputGroupAddon type="prepend">
-                                    <InputGroupText>
-                                        <i className="material-icons">search</i>
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                                <FormInput className="navbar-search" placeholder="닉네임 조회"/>
-                            </InputGroup>
-                        </Form>
-                        <CardBody className="p-0 pb-3">
-                            <table className="table mb-0">
-                                <thead className="bg-light">
-                                    <tr>
-                                        <th scope="col" className="border-0">
-                                            #
-                                        </th>
-                                        <th scope="col" className="border-0">
-                                            닉네임
-                                        </th>
-                                        <th scope="col" className="border-0">
-                                            등급
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        this
-                                            .state
-                                            .accounts
-                                            .map((acc, index) => {
-                                                return (
+            <div>
+                {
+                    this.state.islogIn
+                        ? <Row>
+                                <Col>
+                                    <Card className="my-4 mx-5">
+                                        <CardHeader className="border-bottom">
+                                            <h4 className="m-0">학생 관리</h4>
+                                        </CardHeader>
+                                        <Form className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
+                                            <InputGroup seamless="seamless" size="lg" className="ml-3">
+                                                <InputGroupAddon type="prepend">
+                                                    <InputGroupText>
+                                                        <i className="material-icons">search</i>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+                                                <FormInput className="navbar-search" placeholder="닉네임 조회"/>
+                                            </InputGroup>
+                                        </Form>
+                                        <CardBody className="p-0 pb-3">
+                                            <table className="table mb-0">
+                                                <thead className="bg-light">
                                                     <tr>
-                                                        <td>{index + 1}</td>
-                                                        <td>
-                                                            {acc.name}
-                                                        </td>
-                                                        <td>
-                                                            <FormSelect onChange={this.handleChange}>
-                                                                <option value={index}>{acc.role}</option>
-                                                                <option value='Admin'>Admin</option>
-                                                                <option value='Student'>Student</option>
-                                                                <option value='Guest'>Guest</option>
-                                                            </FormSelect>
-                                                        </td>
+                                                        <th scope="col" className="border-0">
+                                                            #
+                                                        </th>
+                                                        <th scope="col" className="border-0">
+                                                            닉네임
+                                                        </th>
+                                                        <th scope="col" className="border-0">
+                                                            등급
+                                                        </th>
                                                     </tr>
-                                                )
-                                            })
-                                    }
-                                </tbody>
-                            </table>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        this
+                                                            .state
+                                                            .accounts
+                                                            .map((acc, index) => {
+                                                                return (
+                                                                    <tr>
+                                                                        <td>{index + 1}</td>
+                                                                        <td>
+                                                                            {acc.name}
+                                                                        </td>
+                                                                        <td>
+                                                                            <FormSelect onChange={this.handleChange}>
+                                                                                <option value={index}>{acc.role}</option>
+                                                                                <option name={acc.name} value='Admin'>Admin</option>
+                                                                                <option name={acc.name} value='Student'>Student</option>
+                                                                                <option name={acc.name} value='Guest'>Guest</option>
+                                                                            </FormSelect>
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            })
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        : null
+                }
+            </div>
         );
     }
 }

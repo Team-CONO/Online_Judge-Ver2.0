@@ -13,7 +13,7 @@ class Tables extends Component {
     constructor(props) {
         super(props)
         fire()
-        this.state = ({islevel: []})
+        this.state = ({islevel: [], islogIn: false})
     }
     componentDidMount() {
         firebase
@@ -25,6 +25,8 @@ class Tables extends Component {
                         .props
                         .history
                         .push('/')
+                } else {
+                    this.setState({islogIn: true})
                 }
             });
         firebase
@@ -46,48 +48,55 @@ class Tables extends Component {
         alert('문제야 나와줘~')
     }
     render() {
+
         return (
-            <Card className="my-4 mx-5">
-                <CardBody className="p-0 pb-3">
-                    <table className="table mb-0">
-                        <thead className="bg-light">
-                            <tr>
-                                <th scope="col" className="border-0">
-                                    #
-                                </th>
-                                <th scope="col" className="border-0">
-                                    문제 이름
-                                </th>
-                                <th scope="col" className="border-0">
-                                    업로더
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this
-                                    .state
-                                    .islevel
-                                    .map((title, index) => {
-                                        return (
+            <div>
+                {
+                    this.state.islogIn
+                        ? <Card className="my-4 mx-5">
+                                <CardBody className="p-0 pb-3">
+                                    <table className="table mb-0">
+                                        <thead className="bg-light">
                                             <tr>
-                                                <td>{index + 1}</td>
-                                                <td
-                                                    onClick={this.goto}
-                                                    style={{
-                                                        cursor: 'pointer'
-                                                    }}>
-                                                    <font color='blue'>{title}</font>
-                                                </td>
-                                                <td>어드민</td>
+                                                <th scope="col" className="border-0">
+                                                    #
+                                                </th>
+                                                <th scope="col" className="border-0">
+                                                    문제 이름
+                                                </th>
+                                                <th scope="col" className="border-0">
+                                                    업로더
+                                                </th>
                                             </tr>
-                                        )
-                                    })
-                            }
-                        </tbody>
-                    </table>
-                </CardBody>
-            </Card>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                this
+                                                    .state
+                                                    .islevel
+                                                    .map((title, index) => {
+                                                        return (
+                                                            <tr>
+                                                                <td>{index + 1}</td>
+                                                                <td
+                                                                    onClick={this.goto}
+                                                                    style={{
+                                                                        cursor: 'pointer'
+                                                                    }}>
+                                                                    <font color='blue'>{title}</font>
+                                                                </td>
+                                                                <td>어드민</td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                            }
+                                        </tbody>
+                                    </table>
+                                </CardBody>
+                            </Card>
+                        : null
+                }
+            </div>
         );
     }
 }

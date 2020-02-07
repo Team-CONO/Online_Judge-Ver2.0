@@ -17,8 +17,7 @@ class Main extends Component {
         this.state = ({islogIn: false, string: ''})
     }
     static getDerivedStateFromProps(nextProps, prevState) {
-        const location = nextProps.location.pathname;
-        if (location === '/Main' && prevState.islogIn) {
+        if (prevState.islogIn) {
             return {
                 string: <div className="error">
                         <div className="error__content">
@@ -37,7 +36,6 @@ class Main extends Component {
             .auth()
             .onAuthStateChanged(user => {
                 if (!user) {
-                    this.setState({islogIn: false})
                     alert('비정상적인 접근입니다!')
                     this
                         .props
