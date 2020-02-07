@@ -34,45 +34,45 @@ class Admin_view extends Component {
                     return
                 } else {
                     this.setState({islogIn: true})
-                }
-            });
-        firebase
-            .database()
-            .ref('accounts')
-            .once('value')
-            .then(snapshot => {
-                snapshot.forEach(item => {
-                    this.setState({
-                        accounts: this
-                            .state
-                            .accounts
-                            .concat({
-                                name: item
-                                    .val()
-                                    .name,
-                                role: item
-                                    .val()
-                                    .role
+                    firebase
+                        .database()
+                        .ref('accounts')
+                        .once('value')
+                        .then(snapshot => {
+                            snapshot.forEach(item => {
+                                this.setState({
+                                    accounts: this
+                                        .state
+                                        .accounts
+                                        .concat({
+                                            name: item
+                                                .val()
+                                                .name,
+                                            role: item
+                                                .val()
+                                                .role
+                                        })
+                                })
                             })
-                    })
-                })
-            })
-            .catch((e) => {
-                console.log(e.code);
-                switch (e.code) {
-                    case 'PERMISSION_DENIED':
-                        alert('접근 권한이 없습니다!')
-                        this
-                            .props
-                            .history
-                            .push('/Main')
-                        break;
+                        })
+                        .catch((e) => {
+                            console.log(e.code);
+                            switch (e.code) {
+                                case 'PERMISSION_DENIED':
+                                    alert('접근 권한이 없습니다!')
+                                    this
+                                        .props
+                                        .history
+                                        .push('/Main')
+                                    break;
 
-                    default:
-                        alert(e)
-                        break;
+                                default:
+                                    alert(e)
+                                    break;
+                            }
+
+                        });
                 }
-
             });
 
     }
