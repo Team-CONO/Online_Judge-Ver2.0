@@ -56,6 +56,23 @@ class Admin_view extends Component {
                             })
                     })
                 })
+            })
+            .catch((e) => {
+                console.log(e.code);
+                switch (e.code) {
+                    case 'PERMISSION_DENIED':
+                        alert('접근 권한이 없습니다!')
+                        this
+                            .props
+                            .history
+                            .push('/Main')
+                        break;
+
+                    default:
+                        alert(e)
+                        break;
+                }
+
             });
 
     }

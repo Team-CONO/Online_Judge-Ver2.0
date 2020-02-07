@@ -23,7 +23,7 @@ class Main extends Component {
                         <div className="error__content">
                             <h2>Hello World!</h2>
                             <h3>넥스탑 문제풀이 사이트 입니다</h3>
-                            <p>문제 열람 관련해선 담당 선생님께 문의 바랍니다</p>
+                            <p>모든 문제는 담당 선생님께 문의해 열람이 가능합니다</p>
                         </div>
                     </div>
             }
