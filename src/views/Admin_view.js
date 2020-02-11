@@ -48,6 +48,7 @@ class Admin_view extends Component {
                                             name: item
                                                 .val()
                                                 .name,
+                                            uid: item.key,
                                             role: item
                                                 .val()
                                                 .role
@@ -77,11 +78,15 @@ class Admin_view extends Component {
 
     }
     handleChange = (e) => {
-        console.log(e.target.name);
-        // const account = firebase     .auth()     .currentUser; firebase .database()
-        // .ref('accounts/' + account.uid)     .set({email: account.email, name:
-        // account.displayName, role: e.target.value}) .then(alert('변경 완료!')) .catch((e)
-        // => {         alert(e) console.log(e);     });
+        firebase
+            .database()
+            .ref('accounts/' + e.target.id)
+            .update({'role': e.target.value})
+            .then(alert('변경 완료!'))
+            .catch((e) => {
+                alert(e)
+                console.log(e)
+            });
     }
     render() {
         //console.log(this.state.accounts);
@@ -133,11 +138,11 @@ class Admin_view extends Component {
                                                                             {acc.name}
                                                                         </td>
                                                                         <td>
-                                                                            <FormSelect onChange={this.handleChange}>
-                                                                                <option value={index}>{acc.role}</option>
-                                                                                <option name={acc.name} value='Admin'>Admin</option>
-                                                                                <option name={acc.name} value='Student'>Student</option>
-                                                                                <option name={acc.name} value='Guest'>Guest</option>
+                                                                            <FormSelect id={acc.uid} onChange={this.handleChange}>
+                                                                                <option value={index + 1}>{acc.role}</option>
+                                                                                <option value='Admin'>Admin</option>
+                                                                                <option value='Student'>Student</option>
+                                                                                <option value='Guest'>Guest</option>
                                                                             </FormSelect>
                                                                         </td>
                                                                     </tr>
