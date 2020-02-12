@@ -31,12 +31,6 @@ class Admin_Upload extends Component {
             postBody: ""
         };
         fire();
-        var admin = require("firebase-admin");
-        var serviceAccount = require("../serviceAccountKey.json");
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-            databaseURL: "https://mimi-chan.firebaseio.com"
-          });
         //console.log(firebase.auth().currentUser)
     }
     
@@ -88,63 +82,107 @@ class Admin_Upload extends Component {
                 var filelink = "";
 
                 //alert("Storage Start")
-                admin.auth().createCustomToken(user.uid).then(function(customToken){
-                    firebase
-                    .auth()
-                    .signInWithCustomToken(customToken)
-                    .then(res => {
-                        //console.log(res)
-                        if(res.user){
-                            //console.log(path)
-                            firebase
-                                .storage()
-                                .ref()
-                                .child(storagepath)
-                                .put(file)
-                                .then(function(urllink){
-                                    /*var xhr = new XMLHttpRequest();
-                                    xhr.responseType = 'blob';
-                                    xhr.onload = function(event) {
-                                        var blob = xhr.response;
-                                    };*/
-                                    //console.log(urllink.ref.getDownloadURL())
-                                    urllink.ref.getDownloadURL().then(function(url){
-                                        //alert("DB Start")
-                                        admin.auth().createCustomToken(user.uid).then(function(customToken){
-                                            firebase
-                                            .auth()
-                                            .signInWithCustomToken(customToken)
-                                            .then(res => {
-                                            if(res.user){
-                                                    //console.log(filelink)
-                                                    //console.log('posts/' + postData.postKey)
-                                                    firebase
-                                                    .database()
-                                                    .ref('posts/' + postData.tag + "/" + postData.postKey)
-                                                    .set({title: postData.postTitle, body: postData.postBody, url: url})
-                                                    .catch((e) => {
-                                                        console.log('3');
-                                                        console.log(e);
-                                                    })
-                                                }
-                                            })
-                                            .catch((e) => {
-                                                console.log(e);
-                                            });
-                                        }).catch((e) => {
-                                            console.log(e);
-                                        });
-                                    })
-                                    .catch((e) => {
-                                        console.log(e);
-                                    });
-                                    
-                                })
-                                .catch((e) => {
-                                    console.log(e);
-                                });
+                firebase.auth().currentUser.getIdToken(true).then(function(token){
+                    //console.log(customToken)
+                    const customeTokenReq = fetch("https://asia-northeast1-mimi-chan.cloudfunctions.net/auth/token", {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': token
                         }
                     })
+
+                    customeTokenReq
+                        .then((val) => {
+                            console.log('val', val.body);
+                            // val.body
+                            return val.json()
+                        })
+                        .then(res => {
+                            console.log('res', res);
+                            if (res.success) {
+                                firebase
+                                    .auth()
+                                    .signInWithCustomToken(res.token)
+                                    .then(res => {
+                                        console.log('token login ok', res);
+                                        
+                                        firebase
+                                            .storage()
+                                            .ref()
+                                            .child(storagepath)
+                                            .put(file)
+                                            .then(function(urllink){
+                                                console.log('asdfasdf', urllink)
+                                            })
+                                            .catch((err) => {
+                                                console.log('err file',err);
+                                            })
+                                    })
+                                    .catch(err => {
+                                        console.log('token login fail', err);
+                                    })
+                            }
+                        })
+                        .catch(err => {
+                            console.log('err', err);
+                        })
+
+                    // firebase
+                    // .auth()
+                    // .signInWithCustomToken(customToken)
+                    // .then(res => {
+                    //     //console.log(res)
+                    //     if(res.user){
+                    //         //console.log(path)
+                    //         firebase
+                    //             .storage()
+                    //             .ref()
+                    //             .child(storagepath)
+                    //             .put(file)
+                    //             .then(function(urllink){
+                    //                 /*var xhr = new XMLHttpRequest();
+                    //                 xhr.responseType = 'blob';
+                    //                 xhr.onload = function(event) {
+                    //                     var blob = xhr.response;
+                    //                 };*/
+                    //                 //console.log(urllink.ref.getDownloadURL())
+                    //                 urllink.ref.getDownloadURL().then(function(url){
+                    //                     //alert("DB Start")
+                    //                     admin.auth().createCustomToken(user.uid).then(function(customToken){
+                    //                         firebase
+                    //                         .auth()
+                    //                         .signInWithCustomToken(customToken)
+                    //                         .then(res => {
+                    //                         if(res.user){
+                    //                                 //console.log(filelink)
+                    //                                 //console.log('posts/' + postData.postKey)
+                    //                                 firebase
+                    //                                 .database()
+                    //                                 .ref('posts/' + postData.tag + "/" + postData.postKey)
+                    //                                 .set({title: postData.postTitle, body: postData.postBody, url: url})
+                    //                                 .catch((e) => {
+                    //                                     console.log('3');
+                    //                                     console.log(e);
+                    //                                 })
+                    //                             }
+                    //                         })
+                    //                         .catch((e) => {
+                    //                             console.log(e);
+                    //                         });
+                    //                     }).catch((e) => {
+                    //                         console.log(e);
+                    //                     });
+                    //                 })
+                    //                 .catch((e) => {
+                    //                     console.log(e);
+                    //                 });
+                                    
+                    //             })
+                    //             .catch((e) => {
+                    //                 console.log(e);
+                    //             });
+                    //     }
+                    // })
                 });
                 
                 alert('업로드가 완료되었습니다!')
