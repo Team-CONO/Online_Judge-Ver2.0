@@ -36,7 +36,7 @@ class Login extends Component {
                         this
                             .props
                             .history
-                            .push('/Main')
+                            .push('/Admin_Upload')
                     })
                 .catch((e) => {
                     switch (e.code) {

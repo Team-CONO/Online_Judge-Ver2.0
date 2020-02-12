@@ -15,22 +15,29 @@ import {Link} from 'react-router-dom';
 import logo from '../images/logo.png';
 import firebase, {fire} from '../Firebase';
 import storage from '../Firebase';
+import ReactQuill from "react-quill";
+import admin from "firebase-admin";
 
 class Admin_Upload extends Component {
     constructor(props) {
         super(props);
-        this.toggle = this.toggle.bind(this);
         this.state = {
+            uid: "",
             open: false,
             selectedFile: null,
             tag: 'Select by Difficult',
+            postTitle: "",
+            postKey: "",
+            postBody: ""
         };
-        this.postData ={
-            path: '/post/',
-            selectedFile: null,
-            guidCode: ""
-        }
         fire();
+        var admin = require("firebase-admin");
+        var serviceAccount = require("../serviceAccountKey.json");
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+            databaseURL: "https://mimi-chan.firebaseio.com"
+          });
+        //console.log(firebase.auth().currentUser)
     }
     
     toggle() {
@@ -44,40 +51,101 @@ class Admin_Upload extends Component {
         );
     }
     handleSubmit = (e) => {
-        console.log(this.state.selectedFile)
+        //console.log(this.state)
         e.preventDefault();
         if (this.state.tag == "Select by Difficult") {
             alert('난이도를 선택해 주세요!');
             return;
         }
         try {
-            this.postData.guidCode = this.uuidv4()
-            var file = document.querySelector('input[type=file]').files[0];
-
+            //console.log(this.state)
+            //console.log(this.postData)
+            //this.state.postKey = "";
+            //console.log(file)
+            
             const { metaData } = {
                 'contentType': 'image/jpeg'
             }
-            firebase
-                .storage()
-                .ref()
-                .child('posts/' + this.postData.guidCode + '/')
-                .put(file, metaData)
-            ;
-            alert('업로드가 완료되었습니다!');
+            var user = firebase.auth().currentUser;
+            //console.log(user)
+            //console.log(admin.auth().createCustomToken(user.uid))
+            if(user){
+                var file = document.querySelector('input[type=file]').files[0];
+                var postData ={
+                    postKey: firebase.database().ref().child('posts').push().key,
+                    guidCode: this.uuidv4(),
+                    path: "posts/",
+        
+                    postTitle: this.state.postTitle,
+                    postBody: this.state.postBody,
+                    
+                    tag: this.state.tag,
+        
+                    selectedFile: this.state.selectedFile
+                }
+                var databasepath = 'posts/' + postData.tag + '/' + postData.postKey
+                var storagepath = 'posts/' + postData.postKey + '/' + postData.guidCode
+                var filelink = "";
+
+                alert("Storage Start")
+                admin.auth().createCustomToken(user.uid).then(function(customToken){
+                    firebase
+                    .auth()
+                    .signInWithCustomToken(customToken)
+                    .then(res => {
+                        //console.log(res)
+                        if(res.user){
+                            //console.log(path)
+                            firebase
+                                .storage()
+                                .ref()
+                                .child(storagepath)
+                                .put(file)
+                                .then(function(urllink){
+                                    filelink = urllink
+                                })
+                                .catch((e) => {
+                                    console.log(e);
+                                });
+                        }
+                    })
+                });
+                alert("DB Start")
+                admin.auth().createCustomToken(user.uid).then(function(customToken){
+                    firebase
+                    .auth()
+                    .signInWithCustomToken(customToken)
+                    .then(res => {
+                      if(res.user){
+                            firebase
+                            .database()
+                            .ref('posts/' + postData.postKey)
+                            .set({title: postData.postTitle, body: postData.postBody, url: "test"})
+                            .catch((e) => {
+                                console.log(e);
+                            })
+                        }
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                    });
+                }).catch((e) => {
+                    console.log(e);
+                });
+                //alert('업로드가 완료되었습니다!')
+            }
         } catch (e) {
-            alert(e.message);
+            console.log(e)
         }
     }
     handleChange = (e) => {
-        console.log(e.target.value)
-        if(e.target.files){
-            const selectedFile = e.target.files;
-            this.setState(() => ({selectedFile}))
-        }else{
-            this.setState({
-                [e.target.name]: e.target.value
-            })
-        }
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+    rteChange = (content, delta, source, editor, e) => {
+        //console.log(editor.getText()); // plain text
+        this.state.postBody = editor.getText()
     }
     render() {
         return (
@@ -90,7 +158,8 @@ class Admin_Upload extends Component {
                                 <h3 className='m-0'>파일 업로드</h3>
                             </CardHeader>
                             <CardBody>
-                                <FormGroup inline="inline" >
+                                <FormInput name="postTitle" size="lg" className="mb-3" placeholder="Your Post Title" onChange={this.handleChange} />
+                                <FormGroup>
                                     <select class="form-control custom-select" name="tag" onChange={this.handleChange} size="1">
                                         <option>Select by Difficult</option>
                                         <option>E</option>
@@ -106,15 +175,7 @@ class Admin_Upload extends Component {
                                         onChange={this.handleChange}/>
                                 </FormGroup>
 
-                                <FormGroup class="add-new-post">
-                                    <div class="quill add-new-post__editor mb-1">
-                                        <div class="ql-container ql-snow"><div class="ql-editor ql-blank" data-gramm="false" contenteditable="true">
-                                            <p></p>
-                                        </div>
-                                            <div class="ql-clipboard" contenteditable="true" tabindex="-1"></div>
-                                        </div>
-                                    </div>
-                                </FormGroup>
+                                <ReactQuill onChange={this.rteChange} name="postBody" className="add-new-post__editor mb-1" />
 
                                 <Button block='true' style={{marginTop: 20}} onClick={this.handleSubmit}>업로드 하기</Button>
                             </CardBody>

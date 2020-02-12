@@ -22,7 +22,7 @@ export default [
     path: "/",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/Admin_Upload" />
+    component: () => <Redirect to="/Login" />
   },
   {
     path: '/Main',
