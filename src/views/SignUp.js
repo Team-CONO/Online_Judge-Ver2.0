@@ -40,6 +40,15 @@ class SignUpPage extends Component {
                         .props
                         .history
                         .push('/')
+                    firebase
+                        .database()
+                        .ref('accounts/' + res.user.uid)
+                        .set({email: this.state.email, name: this.state.username})
+                        .catch((e) => {
+                            alert(e)
+                            console.log(e);
+
+                        });
                 }
 
             })
@@ -113,7 +122,7 @@ class SignUpPage extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Row className="page-bottom py-5">
                         <Col >
-                            <Button outline="outline" type="submit">회원 가입</Button>
+                            <Button outline type="submit">회원 가입</Button>
                         </Col>
                     </Row>
                 </Form>

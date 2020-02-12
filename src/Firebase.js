@@ -14,7 +14,6 @@ const config = {
 export const fire = () => {
     if (!firebase.apps.length) {
         firebase.initializeApp(config);
-        console.log('firebase 접속')
     }
 }
 
