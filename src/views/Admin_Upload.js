@@ -87,7 +87,7 @@ class Admin_Upload extends Component {
                 var storagepath = 'posts/' + postData.postKey + '/' + postData.guidCode
                 var filelink = "";
 
-                alert("Storage Start")
+                //alert("Storage Start")
                 admin.auth().createCustomToken(user.uid).then(function(customToken){
                     firebase
                     .auth()
@@ -102,7 +102,43 @@ class Admin_Upload extends Component {
                                 .child(storagepath)
                                 .put(file)
                                 .then(function(urllink){
-                                    filelink = urllink
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.responseType = 'blob';
+                                    xhr.onload = function(event) {
+                                        var blob = xhr.response;
+                                    };
+                                    console.log(urllink.ref.getDownloadURL())
+                                    urllink.ref.getDownloadURL().then(function(url){
+                                        //alert("DB Start")
+                                        admin.auth().createCustomToken(user.uid).then(function(customToken){
+                                            firebase
+                                            .auth()
+                                            .signInWithCustomToken(customToken)
+                                            .then(res => {
+                                            if(res.user){
+                                                    //console.log(filelink)
+                                                    //console.log('posts/' + postData.postKey)
+                                                    firebase
+                                                    .database()
+                                                    .ref('posts/' + postData.tag + "/" + postData.postKey)
+                                                    .set({title: postData.postTitle, body: postData.postBody, url: url})
+                                                    .catch((e) => {
+                                                        console.log('3');
+                                                        console.log(e);
+                                                    })
+                                                }
+                                            })
+                                            .catch((e) => {
+                                                console.log(e);
+                                            });
+                                        }).catch((e) => {
+                                            console.log(e);
+                                        });
+                                    })
+                                    .catch((e) => {
+                                        console.log(e);
+                                    });
+                                    
                                 })
                                 .catch((e) => {
                                     console.log(e);
@@ -110,29 +146,8 @@ class Admin_Upload extends Component {
                         }
                     })
                 });
-                alert("DB Start")
-                admin.auth().createCustomToken(user.uid).then(function(customToken){
-                    firebase
-                    .auth()
-                    .signInWithCustomToken(customToken)
-                    .then(res => {
-                      if(res.user){
-                            firebase
-                            .database()
-                            .ref('posts/' + postData.postKey)
-                            .set({title: postData.postTitle, body: postData.postBody, url: "test"})
-                            .catch((e) => {
-                                console.log(e);
-                            })
-                        }
-                    })
-                    .catch((e) => {
-                        console.log(e);
-                    });
-                }).catch((e) => {
-                    console.log(e);
-                });
-                //alert('업로드가 완료되었습니다!')
+                
+                alert('업로드가 완료되었습니다!')
             }
         } catch (e) {
             console.log(e)
