@@ -102,12 +102,12 @@ class Admin_Upload extends Component {
                                 .child(storagepath)
                                 .put(file)
                                 .then(function(urllink){
-                                    var xhr = new XMLHttpRequest();
+                                    /*var xhr = new XMLHttpRequest();
                                     xhr.responseType = 'blob';
                                     xhr.onload = function(event) {
                                         var blob = xhr.response;
-                                    };
-                                    console.log(urllink.ref.getDownloadURL())
+                                    };*/
+                                    //console.log(urllink.ref.getDownloadURL())
                                     urllink.ref.getDownloadURL().then(function(url){
                                         //alert("DB Start")
                                         admin.auth().createCustomToken(user.uid).then(function(customToken){
