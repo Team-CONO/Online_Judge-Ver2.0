@@ -20,7 +20,7 @@ export default function() {
     },
     {
       title: '경시대회',
-      to: '/other',
+      to: '/Other',
       htmlBefore: '<i class="material-icons">public</i>',
       htmlAfter: ''
     }

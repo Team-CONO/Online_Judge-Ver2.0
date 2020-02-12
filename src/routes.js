@@ -56,13 +56,13 @@ export default [
     component: Tables
   },
   {
-    path: "/other",
+    path: "/Other",
     layout: DefaultLayout,
     component: Tables
   },
   {
     path: "/Admin_Upload",
-    layout: nonDefaultLayout,
+    layout: DefaultLayout,
     component: Admin_Upload
   },
   { 

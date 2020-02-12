@@ -48,7 +48,6 @@ class Tables extends Component {
         alert('문제야 나와줘~')
     }
     render() {
-
         return (
             <div>
                 {
