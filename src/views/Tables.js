@@ -39,13 +39,21 @@ class Tables extends Component {
                         islevel: this
                             .state
                             .islevel
-                            .concat(item.val().title)
+                            .concat({
+                                title: item
+                                    .val()
+                                    .title,
+                                url: item
+                                    .val()
+                                    .url
+                            })
                     })
                 })
             });
     }
-    goto = () => {
-        alert('문제야 나와줘~')
+    goto = (url) => {
+        // alert('문제야 나와줘~')
+        alert(url)
     }
     render() {
         return (
@@ -73,16 +81,16 @@ class Tables extends Component {
                                                 this
                                                     .state
                                                     .islevel
-                                                    .map((title, index) => {
+                                                    .map((level, index) => {
                                                         return (
                                                             <tr>
                                                                 <td>{index + 1}</td>
                                                                 <td
-                                                                    onClick={this.goto}
+                                                                    onClick={() => this.goto(level.url)}
                                                                     style={{
                                                                         cursor: 'pointer'
                                                                     }}>
-                                                                    <font color='blue'>{title}</font>
+                                                                    <font color='blue'>{level.title}</font>
                                                                 </td>
                                                                 <td>어드민</td>
                                                             </tr>
