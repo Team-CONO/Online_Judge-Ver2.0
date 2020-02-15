@@ -8,8 +8,6 @@ import {
     CardBody
 } from "shards-react";
 import firebase, {fire} from '../Firebase'
-import {Link} from "react-router-dom";
-import DownloadLink from "react-download-link";
 
 class Tables extends Component {
     constructor(props) {
@@ -57,8 +55,7 @@ class Tables extends Component {
         if (url) {
             try {
                 console.log(url);
-                
-                return (<a href={url} download="download"></a>);
+                window.open(url)
             } catch (error) {
                 console.log(error);
             }
