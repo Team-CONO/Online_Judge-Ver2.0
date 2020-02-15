@@ -88,8 +88,44 @@ class Admin_view extends Component {
                 console.log(e)
             });
     }
+    show_tables(uid, role) {
+        switch (role) {
+            case 'Admin':
+                return (
+                    <FormSelect id={uid} onChange={this.handleChange}>
+                        <option>{role}</option>
+                        <option value='Student'>Student</option>
+                        <option value='Guest'>Guest</option>
+                    </FormSelect>
+                )
+            case 'Student':
+                return (
+                    <FormSelect id={uid} onChange={this.handleChange}>
+                        <option>{role}</option>
+                        <option value='Admin'>Admin</option>
+                        <option value='Guest'>Guest</option>
+                    </FormSelect>
+                )
+            case 'Guest':
+                return (
+                    <FormSelect id={uid} onChange={this.handleChange}>
+                        <option>{role}</option>
+                        <option value='Admin'>Admim</option>
+                        <option value='Student'>Student</option>
+                    </FormSelect>
+                )
+            default:
+                return (
+                    <FormSelect id={uid} onChange={this.handleChange}>
+                        <option>{role}</option>
+                        <option value='Admin'>Admim</option>
+                        <option value='Student'>Student</option>
+                        <option value='Guest'>Guest</option>
+                    </FormSelect>
+                )
+        }
+    }
     render() {
-        //console.log(this.state.accounts);
         return (
             <div>
                 {
@@ -101,7 +137,7 @@ class Admin_view extends Component {
                                             <h4 className="m-0">학생 관리</h4>
                                         </CardHeader>
                                         <Form className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
-                                            <InputGroup seamless="seamless" size="lg" className="ml-3">
+                                            <InputGroup seamless size="lg" className="ml-3">
                                                 <InputGroupAddon type="prepend">
                                                     <InputGroupText>
                                                         <i className="material-icons">search</i>
@@ -138,12 +174,7 @@ class Admin_view extends Component {
                                                                             {acc.name}
                                                                         </td>
                                                                         <td>
-                                                                            <FormSelect id={acc.uid} onChange={this.handleChange}>
-                                                                                <option value={index + 1}>{acc.role}</option>
-                                                                                <option value='Admin'>Admin</option>
-                                                                                <option value='Student'>Student</option>
-                                                                                <option value='Guest'>Guest</option>
-                                                                            </FormSelect>
+                                                                            {this.show_tables(acc.uid, acc.role)}
                                                                         </td>
                                                                     </tr>
                                                                 )
