@@ -15,7 +15,6 @@ import BlogPosts from "./views/BlogPosts";
 import Login from "./views/Login";
 import Main from './views/Main';
 import SignUp from "./views/SignUp";
-import Admin_Upload from "./views/Admin_Upload";
 import Admin_view from './views/Admin_view';
 
 export default [
@@ -61,11 +60,6 @@ export default [
     component: Tables
   },
   {
-    path: "/Admin_Upload",
-    layout: DefaultLayout,
-    component: Admin_Upload
-  },
-  { 
     path: "/Admin_view",
     layout: DefaultLayout,
     component: Admin_view
