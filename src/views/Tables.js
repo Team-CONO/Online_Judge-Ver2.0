@@ -8,6 +8,8 @@ import {
     CardBody
 } from "shards-react";
 import firebase, {fire} from '../Firebase'
+import {Link} from "react-router-dom";
+import DownloadLink from "react-download-link";
 
 class Tables extends Component {
     constructor(props) {
@@ -51,9 +53,18 @@ class Tables extends Component {
                 })
             });
     }
-    goto = (url) => {
-        // alert('문제야 나와줘~')
-        alert(url)
+    get_files = (url) => {
+        if (url) {
+            try {
+                console.log(url);
+                
+                return (<a href={url} download="download"></a>);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            alert('파일이 존재하질 않습니다!')
+        }
     }
     render() {
         return (
@@ -86,7 +97,7 @@ class Tables extends Component {
                                                             <tr>
                                                                 <td>{index + 1}</td>
                                                                 <td
-                                                                    onClick={() => this.goto(level.url)}
+                                                                    onClick={() => this.get_files(level.url)}
                                                                     style={{
                                                                         cursor: 'pointer'
                                                                     }}>
