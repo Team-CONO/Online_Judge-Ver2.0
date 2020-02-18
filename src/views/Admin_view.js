@@ -88,7 +88,7 @@ class Admin_view extends Component {
                 console.log(e)
             });
     }
-    show_tables(uid, role) {
+    show_select(uid, role) {
         switch (role) {
             case 'Admin':
                 return (
@@ -193,7 +193,7 @@ class Admin_view extends Component {
                                                                             {acc.name}
                                                                         </td>
                                                                         <td>
-                                                                            {this.show_tables(acc.uid, acc.role)}
+                                                                            {this.show_select(acc.uid, acc.role)}
                                                                         </td>
                                                                     </tr>
                                                                 )
