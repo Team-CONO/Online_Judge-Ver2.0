@@ -19,7 +19,7 @@ class Admin_view extends Component {
     constructor(props) {
         super(props)
         fire()
-        this.state = ({accounts: [], islogIn: false, search: null})
+        this.state = ({cp_accounts:[], accounts: [], islogIn: false, search: null})
     }
     componentDidMount() {
         firebase
@@ -53,6 +53,7 @@ class Admin_view extends Component {
                                                 .val()
                                                 .role
                                         })
+                                    ,cp_accounts : this.state.accounts
                                 })
                             })
                         })
@@ -127,19 +128,29 @@ class Admin_view extends Component {
     }
     handelSearch = (e) => {
         this.setState({search: e.target.value})
-    }
-    handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state.search);        
         this.setState({
-            accounts: this
+            cp_accounts: this
                 .state
                 .accounts
-                .filter(element => element.name === this.state.search)
+                .filter(element => element.name.toLowerCase().match(this.state.search))
         })
+        console.log(this.state.cp_accounts);
+        
     }
+    // handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log(this.state.search);        
+    //     this.setState({
+    //         accounts: this
+    //             .state
+    //             .accounts
+    //             .filter(element => element.name.match(this.state.search))
+    //     })
+    // }
     render() {
-        console.log(this.state.accounts);
+        // console.log(this.state.accounts);
         return (
             <div>
                 {
@@ -151,7 +162,7 @@ class Admin_view extends Component {
                                             <h4 className="m-0">회원 관리</h4>
                                         </CardHeader>
                                         <Form
-                                            onSubmit={this.handleSubmit}
+                                            // onSubmit={this.handleSubmit}
                                             className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
                                             <InputGroup seamless="seamless" size="lg" className="ml-3">
                                                 <InputGroupAddon type="prepend">
@@ -184,7 +195,7 @@ class Admin_view extends Component {
                                                     {
                                                         this
                                                             .state
-                                                            .accounts
+                                                            .cp_accounts
                                                             .map((acc, index) => {
                                                                 return (
                                                                     <tr>
