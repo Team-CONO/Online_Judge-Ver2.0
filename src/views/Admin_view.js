@@ -19,7 +19,7 @@ class Admin_view extends Component {
     constructor(props) {
         super(props)
         fire()
-        this.state = ({accounts: [], islogIn: false})
+        this.state = ({accounts: [], islogIn: false, search: null})
     }
     componentDidMount() {
         firebase
@@ -125,7 +125,21 @@ class Admin_view extends Component {
                 )
         }
     }
+    handelSearch = (e) => {
+        this.setState({search: e.target.value})
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state.search);        
+        this.setState({
+            accounts: this
+                .state
+                .accounts
+                .filter(element => element.name === this.state.search)
+        })
+    }
     render() {
+        console.log(this.state.accounts);
         return (
             <div>
                 {
@@ -134,16 +148,21 @@ class Admin_view extends Component {
                                 <Col>
                                     <Card className="my-4 mx-5">
                                         <CardHeader className="border-bottom">
-                                            <h4 className="m-0">학생 관리</h4>
+                                            <h4 className="m-0">회원 관리</h4>
                                         </CardHeader>
-                                        <Form className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
-                                            <InputGroup seamless size="lg" className="ml-3">
+                                        <Form
+                                            onSubmit={this.handleSubmit}
+                                            className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
+                                            <InputGroup seamless="seamless" size="lg" className="ml-3">
                                                 <InputGroupAddon type="prepend">
                                                     <InputGroupText>
                                                         <i className="material-icons">search</i>
                                                     </InputGroupText>
                                                 </InputGroupAddon>
-                                                <FormInput className="navbar-search" placeholder="닉네임 조회"/>
+                                                <FormInput
+                                                    onChange={this.handelSearch}
+                                                    className="navbar-search"
+                                                    placeholder="닉네임 조회"/>
                                             </InputGroup>
                                         </Form>
                                         <CardBody className="p-0 pb-3">
