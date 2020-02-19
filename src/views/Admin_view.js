@@ -148,7 +148,7 @@ class Admin_view extends Component {
                                             <h4 className="m-0">회원 관리</h4>
                                         </CardHeader>
                                         <Form className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
-                                            <InputGroup seamless="seamless" size="lg" className="ml-3">
+                                            <InputGroup seamless size="lg" className="ml-3">
                                                 <InputGroupAddon type="prepend">
                                                     <InputGroupText>
                                                         <i className="material-icons">search</i>
