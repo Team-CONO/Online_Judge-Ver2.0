@@ -52,6 +52,7 @@ class Login extends Component {
                     }
                 });
         } catch (e) {
+            console.log(e);    
             alert(e.message);
         }
     }
@@ -87,6 +88,7 @@ class Login extends Component {
                         })
                 })
         } catch (e) {
+            console.log(e);
             alert(e.code);
         }
     }

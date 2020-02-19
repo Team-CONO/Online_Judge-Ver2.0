@@ -61,6 +61,8 @@ export default class UserActions extends React.Component {
             .catch(function (error) {
                 // An error happened.
                 alert(error)
+                console.log(error);
+                
             });
     }
 

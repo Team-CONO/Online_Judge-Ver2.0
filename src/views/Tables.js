@@ -74,6 +74,7 @@ class Tables extends Component {
                 window.open(url)
             } catch (error) {
                 console.log(error);
+                alert(error)
             }
         } else {
             alert('파일이 존재하질 않습니다!')
