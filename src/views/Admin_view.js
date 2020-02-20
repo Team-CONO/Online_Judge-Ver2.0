@@ -129,11 +129,13 @@ class Admin_view extends Component {
     }
     handelSearch = (e) => {
         e.preventDefault();
+        let target_name = e.target.value
+        target_name = target_name.replace(/\\/g, "\\\\")
         this.setState({
             cp_accounts: this
                 .state
                 .accounts
-                .filter(element => element.name.toLowerCase().match(e.target.value))
+                .filter(element => element.name.toLowerCase().match(target_name))
         })
     }
     render() {
