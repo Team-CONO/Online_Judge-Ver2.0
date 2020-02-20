@@ -70,7 +70,7 @@ class Tables extends Component {
     get_files = (url) => {
         if (url) {
             try {
-                console.log(url);
+                // console.log(url);
                 window.open(url)
             } catch (error) {
                 console.log(error);
