@@ -92,37 +92,50 @@ class Admin_view extends Component {
     }
     show_select(uid, role) {
         switch (role) {
-            case 'Admin':
+            case 'E':
                 return (
                     <FormSelect id={uid} onChange={this.handleChange}>
                         <option>{role}</option>
-                        <option value='Student'>Student</option>
-                        <option value='Guest'>Guest</option>
+                        <option value='M'>M</option>
+                        <option value='H'>H</option>
+                        <option value='Other'>Other</option>
                     </FormSelect>
                 )
-            case 'Student':
+            case 'M':
                 return (
                     <FormSelect id={uid} onChange={this.handleChange}>
                         <option>{role}</option>
-                        <option value='Admin'>Admin</option>
-                        <option value='Guest'>Guest</option>
+                        <option value='E'>E</option>
+                        <option value='H'>H</option>
+                        <option value='Other'>Other</option>
                     </FormSelect>
                 )
-            case 'Guest':
+            case 'H':
                 return (
                     <FormSelect id={uid} onChange={this.handleChange}>
                         <option>{role}</option>
-                        <option value='Admin'>Admim</option>
-                        <option value='Student'>Student</option>
+                        <option value='E'>E</option>
+                        <option value='M'>M</option>
+                        <option value='Other'>Other</option>
                     </FormSelect>
                 )
+            case 'Other':
+                return (
+                    <FormSelect id={uid} onChange={this.handleChange}>
+                        <option>{role}</option>
+                        <option value='E'>E</option>
+                        <option value='M'>M</option>
+                        <option value='H'>H</option>
+                    </FormSelect>
+                )   
             default:
                 return (
                     <FormSelect id={uid} onChange={this.handleChange}>
                         <option>{role}</option>
-                        <option value='Admin'>Admim</option>
-                        <option value='Student'>Student</option>
-                        <option value='Guest'>Guest</option>
+                        <option value='E'>E</option>
+                        <option value='M'>M</option>
+                        <option value='H'>H</option>
+                        <option value='Other'>Other</option>
                     </FormSelect>
                 )
         }
