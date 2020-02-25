@@ -27,45 +27,46 @@ class Tables extends Component {
                         .push('/')
                 } else {
                     this.setState({islogIn: true})
-                }
-            });
-        firebase
-            .database()
-            .ref('posts' + this.props.location.pathname)
-            .once('value')
-            .then(snapshot => {
-                snapshot.forEach(item => {
-                    this.setState({
-                        islevel: this
-                            .state
-                            .islevel
-                            .concat({
-                                title: item
-                                    .val()
-                                    .title,
-                                url: item
-                                    .val()
-                                    .url
+                    firebase
+                        .database()
+                        .ref('posts' + this.props.location.pathname)
+                        .once('value')
+                        .then(snapshot => {
+                            snapshot.forEach(item => {
+                                this.setState({
+                                    islevel: this
+                                        .state
+                                        .islevel
+                                        .concat({
+                                            title: item
+                                                .val()
+                                                .title,
+                                            url: item
+                                                .val()
+                                                .url
+                                        })
+                                })
                             })
-                    })
-                })
-            })
-            .catch((e) => {
-                console.log(e.code);
-                switch (e.code) {
-                    case 'PERMISSION_DENIED':
-                        alert('접근 권한이 없습니다!')
-                        this
-                            .props
-                            .history
-                            .push('/Main')
-                        break;
+                        })
+                        .catch((e) => {
+                            console.log(e.code);
+                            switch (e.code) {
+                                case 'PERMISSION_DENIED':
+                                    alert('접근 권한이 없습니다!')
+                                    this
+                                        .props
+                                        .history
+                                        .push('/Main')
+                                    break;
 
-                    default:
-                        alert(e)
-                        break;
+                                default:
+                                    alert(e)
+                                    break;
+                            }
+                        });
                 }
             });
+
     }
     get_files = (url) => {
         if (url) {
