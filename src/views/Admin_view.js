@@ -22,6 +22,7 @@ class Admin_view extends Component {
         this.state = ({cp_accounts: [], accounts: [], islogIn: false})
     }
     componentDidMount() {
+        this._ismounted = true;
         firebase
             .auth()
             .onAuthStateChanged(user => {
