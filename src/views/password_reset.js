@@ -27,12 +27,17 @@ class password_reset extends Component {
             alert('빈칸을 채워주세요!');
             return;
         } else {
+            firebase
+                .auth()
+                .languageCode = 'ko';
+            // To apply the default browser preference instead of explicitly setting it.
+            // firebase.auth().useDeviceLanguage();
             var auth = firebase.auth();
             var emailAddress = this.state.email;
 
             auth
                 .sendPasswordResetEmail(emailAddress)
-                .then(function () {
+                .then(()=>{
                     // Email sent.
                     alert('해당 이메일 주소로 비밀번호 변경 관련 메일을 보냈습니다!')
                     this
