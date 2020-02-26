@@ -48,6 +48,7 @@ class Login extends Component {
                             break;
                         default:
                             alert(e)
+                            console.log(e);
                             break;
                     }
                 });
@@ -124,7 +125,7 @@ class Login extends Component {
                                     </FormGroup>
 
                                     <div className='text-right'>
-                                        <Link to='/password_reset'>비밀번호를 잊었나요?</Link>
+                                        <Link to='/Password_reset'>비밀번호를 잊었나요?</Link>
                                     </div>
 
                                     <FormGroup className="text-left">

@@ -15,7 +15,7 @@ import firebase, {fire} from '../Firebase';
 import logo from '../images/logo.png'
 
 // eslint-disable-next-line no-unused-vars
-class password_reset extends Component {
+class Password_reset extends Component {
     constructor(props) {
         super(props);
         fire();
@@ -100,4 +100,4 @@ class password_reset extends Component {
     }
 }
 
-export default password_reset;
+export default Password_reset;

@@ -72,6 +72,7 @@ class Admin_view extends Component {
 
                                 default:
                                     alert(e)
+                                    console.log(e);
                                     break;
                             }
 

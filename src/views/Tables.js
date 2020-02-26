@@ -61,6 +61,7 @@ class Tables extends Component {
 
                                 default:
                                     alert(e)
+                                    console.log(e);
                                     break;
                             }
                         });

@@ -17,7 +17,7 @@ import Main from './views/Main';
 import SignUp from "./views/SignUp";
 import Admin_view from './views/Admin_view';
 import Admin_Upload from "./views/Admin_Upload";
-import password_reset from './views/password_reset';
+import Password_reset from './views/Password_reset';
 
 export default [
   {
@@ -72,9 +72,9 @@ export default [
     component: Admin_Upload
   },
   {
-    path: "/password_reset",
+    path: "/Password_reset",
     layout: nonDefaultLayout,
-    component: password_reset
+    component: Password_reset
   },
   // {
   //   path: "/user-profile-lite",

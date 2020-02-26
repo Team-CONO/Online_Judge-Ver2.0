@@ -60,8 +60,12 @@ class SignUpPage extends Component {
                     case 'auth/weak-password':
                         alert('비밀번호는 최소 6자리 이상입니다');
                         break;
+                    case 'auth/invalid-email':
+                        alert("이메일 형식이 잘못 되었습니다")
+                        break
                     default:
                         alert(e);
+                        console.log(e);
                         break;
                 }
             });
