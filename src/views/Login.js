@@ -123,6 +123,10 @@ class Login extends Component {
                                             onChange={this.handleChange}/>
                                     </FormGroup>
 
+                                    <div className='text-right'>
+                                        <Link to='/password_reset'>비밀번호를 잊었나요?</Link>
+                                    </div>
+
                                     <FormGroup className="text-left">
                                         <label htmlFor="#password">비밀번호</label>
                                         <FormInput
