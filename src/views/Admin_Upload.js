@@ -11,10 +11,7 @@ import {
     CardHeader,
     CardBody
 } from "shards-react";
-import {Link} from 'react-router-dom';
-import logo from '../images/logo.png';
 import firebase, {fire} from '../Firebase';
-import storage from '../Firebase';
 import ReactQuill from "react-quill";
 
 class Admin_Upload extends Component {
@@ -40,16 +37,18 @@ class Admin_Upload extends Component {
             };
         });
     }
+
     uuidv4() {
         return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(
             /[018]/g,
             c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
         );
     }
+
     handleSubmit = (e) => {
         //console.log(this.state)
         e.preventDefault();
-        if (this.state.tag == "Select by Difficult") {
+        if (this.state.tag === "Select by Difficult") {
             alert('난이도를 선택해 주세요!');
             return;
         }
@@ -57,9 +56,6 @@ class Admin_Upload extends Component {
             // console.log(this.state) console.log(this.postData) this.state.postKey = "";
             // console.log(file)
 
-            const {metaData} = {
-                'contentType': 'image/jpeg'
-            }
             var user = firebase
                 .auth()
                 .currentUser;
@@ -94,7 +90,7 @@ class Admin_Upload extends Component {
                 var file = document
                     .querySelector('input[type=file]')
                     .files[0];
-                    
+
                 var postData = {
                     postKey: firebase
                         .database()
@@ -112,10 +108,8 @@ class Admin_Upload extends Component {
 
                     selectedFile: this.state.selectedFile
                 }
-                var databasepath = 'posts/' + postData.tag + '/' + postData.postKey
-                var storagepath = 'posts/' + postData.postKey + '/' + postData.guidCode + _fileExt
-                var filelink = "";
-
+                var storagepath = 'posts/' + postData.postKey + '/' + postData.guidCode +
+                        _fileExt
                 console.log(storagepath)
 
                 //alert("Storage Start")
@@ -134,7 +128,6 @@ class Admin_Upload extends Component {
                                 }
                             }
                         )
-
                         customeTokenReq
                             .then((val) => {
                                 console.log('val', val.body);
@@ -185,32 +178,6 @@ class Admin_Upload extends Component {
                             .catch(err => {
                                 console.log('err', err);
                             })
-
-                            // firebase .auth() .signInWithCustomToken(customToken) .then(res => {
-                            // console.log(res)     if(res.user){         console.log(path)         firebase
-                            // .storage()             .ref()             .child(storagepath)
-                            // .put(file)             .then(function(urllink){                 /*var xhr =
-                            // new XMLHttpRequest();                 xhr.responseType = 'blob';
-                            // xhr.onload = function(event) {                     var blob = xhr.response;
-                            // };*/                 console.log(urllink.ref.getDownloadURL())
-                            // urllink.ref.getDownloadURL().then(function(url){
-                            // alert("DB Start")
-                            // admin.auth().createCustomToken(user.uid).then(function(customToken){
-                            // firebase                         .auth()
-                            // .signInWithCustomToken(customToken)                         .then(res => {
-                            // if(res.user){                                 console.log(filelink)
-                            // console.log('posts/' + postData.postKey)
-                            // firebase                                 .database()
-                            // .ref('posts/' + postData.tag + "/" + postData.postKey)
-                            // .set({title: postData.postTitle, body: postData.postBody, url: url})
-                            // .catch((e) => {                                     console.log('3');
-                            // console.log(e);                                 })
-                            // }                         })                         .catch((e) => {
-                            // console.log(e);                         });                     }).catch((e)
-                            // => {                         console.log(e);                     });
-                            // })                 .catch((e) => {                     console.log(e);
-                            // });             })             .catch((e) => {
-                            // console.log(e);             });     } })
                         });
 
                 alert('업로드가 완료되었습니다!')
@@ -219,33 +186,34 @@ class Admin_Upload extends Component {
             console.log(e)
         }
     }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
         //console.log(this.state.selectedFile)
     }
+
     rteChange = (content, delta, source, editor, e) => {
         //console.log(editor.getText());  plain text
-        this.state.postBody = editor.getText()
+        this.setState({postBody: editor.getText()})
     }
+
     render() {
         return (
-
             <div>
                 <Row>
-                    <Col /*"style={{paddingTop: 25, paddingLeft: 63}}"*/
-                    >
+                    <Col>
                         <Card className="my-4 mx-5">
                             <CardHeader className="">
                                 <h4 className='m-0'>파일 업로드</h4>
                             </CardHeader>
-                            <CardBody >
+                            <CardBody>
                                 <FormInput
                                     name="postTitle"
                                     size="lg"
                                     className="mb-3"
-                                    placeholder="Your Post Title"
+                                    placeholder="타이틀을 입력해주세요"
                                     onChange={this.handleChange}/>
                                 <FormGroup>
                                     <select
@@ -253,7 +221,7 @@ class Admin_Upload extends Component {
                                         name="tag"
                                         onChange={this.handleChange}
                                         size="1">
-                                        <option>Select by Difficult</option>
+                                        <option>해당 게시물의 등급을 설정해주세요</option>
                                         <option>E</option>
                                         <option>M</option>
                                         <option>H</option>
@@ -265,7 +233,7 @@ class Admin_Upload extends Component {
                                         }}
                                         type="file"
                                         name="selectedFile"
-                                        accept=".docx, .hwp, .jpg, .jpeg, .png"
+                                        accept=".doc, .docx, .hwp, .jpg, .jpeg, .png"
                                         onChange={this.handleChange}/>
                                 </FormGroup>
 
