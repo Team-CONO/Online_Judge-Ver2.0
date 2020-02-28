@@ -54,9 +54,8 @@ class Admin_Upload extends Component {
                                     .props
                                     .history
                                     .push('/Main')
-                            }
-                            else{
-                                this.setState({isAdmin : true})
+                            } else {
+                                this.setState({isAdmin: true})
                             }
                         })
                 }
@@ -97,20 +96,20 @@ class Admin_Upload extends Component {
 
                 var _fileLen = this.state.selectedFile.length;
 
-                var _lastDot = this
-                    .state
-                    .selectedFile
-                    .lastIndexOf('.');
+                // var _lastDot = this
+                //     .state
+                //     .selectedFile
+                //     .lastIndexOf('.');
                 var _lastSla = this
                     .state
                     .selectedFile
                     .lastIndexOf('\\');
 
-                var _fileExt = this
-                    .state
-                    .selectedFile
-                    .substring(_lastDot, _fileLen)
-                    .toLowerCase();
+                // var _fileExt = this
+                //     .state
+                //     .selectedFile
+                //     .substring(_lastDot, _fileLen)
+                //     .toLowerCase();
 
                 var _fileName = this
                     .state
@@ -118,7 +117,7 @@ class Admin_Upload extends Component {
                     .substring(_lastSla + 1, _fileLen)
                     .toLowerCase();
 
-                console.log(_fileExt)
+                console.log(_fileName)
 
                 var file = document
                     .querySelector('input[type=file]')
@@ -131,7 +130,7 @@ class Admin_Upload extends Component {
                         .child('posts')
                         .push()
                         .key,
-                    guidCode: this.uuidv4(),
+                    // guidCode: this.uuidv4(),
                     path: "posts/",
 
                     postTitle: this.state.postTitle,
@@ -141,8 +140,9 @@ class Admin_Upload extends Component {
 
                     selectedFile: this.state.selectedFile
                 }
-                var storagepath = 'posts/' + postData.postKey + '/' + postData.guidCode +
-                        _fileExt
+                // var storagepath = 'posts/' + postData.postKey + '/' + postData.guidCode +
+                //         _fileName
+                var storagepath = 'posts/' + postData.postKey + '/' + _fileName
                 console.log(storagepath)
 
                 //alert("Storage Start")
@@ -278,7 +278,7 @@ class Admin_Upload extends Component {
                                                 className="add-new-post__editor mb-1"/>
 
                                             <Button
-                                                block
+                                                block="block"
                                                 style={{
                                                     marginTop: 20
                                                 }}
