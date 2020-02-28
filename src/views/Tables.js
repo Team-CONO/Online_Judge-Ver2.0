@@ -58,7 +58,6 @@ class Tables extends Component {
                                         .history
                                         .push('/Main')
                                     break;
-
                                 default:
                                     alert(e)
                                     console.log(e);
@@ -67,7 +66,6 @@ class Tables extends Component {
                         });
                 }
             });
-
     }
     get_files = (url) => {
         if (url) {

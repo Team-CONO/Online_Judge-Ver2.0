@@ -18,6 +18,7 @@ class Admin_Upload extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isAdmin: false,
             uid: "",
             open: false,
             selectedFile: null,
@@ -28,6 +29,38 @@ class Admin_Upload extends Component {
         };
         fire();
         //console.log(firebase.auth().currentUser)
+    }
+
+    componentDidMount() {
+        firebase
+            .auth()
+            .onAuthStateChanged(user => {
+                if (!user) {
+                    alert('비정상적인 접근입니다!')
+                    this
+                        .props
+                        .history
+                        .push('/')
+                } else {
+                    firebase
+                        .database()
+                        .ref('accounts/' + user.uid)
+                        .child('role')
+                        .once('value')
+                        .then(snapshot => {
+                            if (snapshot.val() !== 'Admin') {
+                                alert('접근 권한이 없습니다!')
+                                this
+                                    .props
+                                    .history
+                                    .push('/Main')
+                            }
+                            else{
+                                this.setState({isAdmin : true})
+                            }
+                        })
+                }
+            });
     }
 
     toggle() {
@@ -202,56 +235,60 @@ class Admin_Upload extends Component {
     render() {
         return (
             <div>
-                <Row>
-                    <Col>
-                        <Card className="my-4 mx-5">
-                            <CardHeader className="">
-                                <h4 className='m-0'>파일 업로드</h4>
-                            </CardHeader>
-                            <CardBody>
-                                <FormInput
-                                    name="postTitle"
-                                    size="lg"
-                                    className="mb-3"
-                                    placeholder="타이틀을 입력해주세요"
-                                    onChange={this.handleChange}/>
-                                <FormGroup>
-                                    <select
-                                        class="form-control custom-select"
-                                        name="tag"
-                                        onChange={this.handleChange}
-                                        size="1">
-                                        <option>해당 게시물의 등급을 설정해주세요</option>
-                                        <option>E</option>
-                                        <option>M</option>
-                                        <option>H</option>
-                                        <option>Other</option>
-                                    </select>
-                                    <input
-                                        style={{
-                                            marginTop: 15
-                                        }}
-                                        type="file"
-                                        name="selectedFile"
-                                        accept=".doc, .docx, .hwp, .jpg, .jpeg, .png"
-                                        onChange={this.handleChange}/>
-                                </FormGroup>
+                {
+                    this.state.isAdmin
+                        ? <Row>
+                                <Col>
+                                    <Card className="my-4 mx-5">
+                                        <CardHeader className="">
+                                            <h4 className='m-0'>파일 업로드</h4>
+                                        </CardHeader>
+                                        <CardBody>
+                                            <FormInput
+                                                name="postTitle"
+                                                size="lg"
+                                                className="mb-3"
+                                                placeholder="타이틀을 입력해주세요"
+                                                onChange={this.handleChange}/>
+                                            <FormGroup>
+                                                <select
+                                                    className="form-control custom-select"
+                                                    name="tag"
+                                                    onChange={this.handleChange}
+                                                    size="1">
+                                                    <option>해당 게시물의 등급을 설정해주세요</option>
+                                                    <option>E</option>
+                                                    <option>M</option>
+                                                    <option>H</option>
+                                                    <option>Other</option>
+                                                </select>
+                                                <input
+                                                    style={{
+                                                        marginTop: 15
+                                                    }}
+                                                    type="file"
+                                                    name="selectedFile"
+                                                    accept=".doc, .docx, .hwp, .jpg, .jpeg, .png"
+                                                    onChange={this.handleChange}/>
+                                            </FormGroup>
 
-                                <ReactQuill
-                                    onChange={this.rteChange}
-                                    name="postBody"
-                                    className="add-new-post__editor mb-1"/>
+                                            <ReactQuill
+                                                onChange={this.rteChange}
+                                                name="postBody"
+                                                className="add-new-post__editor mb-1"/>
 
-                                <Button
-                                    block='true'
-                                    style={{
-                                        marginTop: 20
-                                    }}
-                                    onClick={this.handleSubmit}>업로드 하기</Button>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
+                                            <Button
+                                                block
+                                                style={{
+                                                    marginTop: 20
+                                                }}
+                                                onClick={this.handleSubmit}>업로드 하기</Button>
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        : null
+                }
             </div>
         );
     }
