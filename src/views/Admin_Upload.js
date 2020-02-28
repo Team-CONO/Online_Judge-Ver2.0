@@ -278,7 +278,7 @@ class Admin_Upload extends Component {
                                                 className="add-new-post__editor mb-1"/>
 
                                             <Button
-                                                block="block"
+                                                block
                                                 style={{
                                                     marginTop: 20
                                                 }}

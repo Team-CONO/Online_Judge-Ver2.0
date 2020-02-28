@@ -11,7 +11,8 @@ import {
     FormInput,
     Form,
     InputGroupAddon,
-    InputGroupText
+    InputGroupText,
+    Button
 } from "shards-react";
 import firebase, {fire} from '../Firebase'
 
@@ -129,7 +130,7 @@ class Admin_view extends Component {
                         <option value='M'>M</option>
                         <option value='H'>H</option>
                     </FormSelect>
-                )   
+                )
             default:
                 return (
                     <FormSelect id={uid} onChange={this.handleChange}>
@@ -153,6 +154,9 @@ class Admin_view extends Component {
                 .filter(element => element.name.toLowerCase().match(target_name))
         })
     }
+    delete = (e) => {
+        console.log(e.target.id);
+    }
     render() {
         return (
             <div>
@@ -160,7 +164,7 @@ class Admin_view extends Component {
                     this.state.islogIn
                         ? <Row>
                                 <Col>
-                                    <Card className="my-4 mx-5">
+                                    <Card className="my-3 mx-3">
                                         <CardHeader className="border-bottom">
                                             <h4 className="m-0">회원 관리</h4>
                                         </CardHeader>
@@ -206,6 +210,11 @@ class Admin_view extends Component {
                                                                         </td>
                                                                         <td>
                                                                             {this.show_select(acc.uid, acc.role)}
+                                                                        </td>
+                                                                        <td>
+                                                                            <Button id={acc.uid} squared theme="danger" onClick={this.delete}>
+                                                                                제거
+                                                                            </Button>
                                                                         </td>
                                                                     </tr>
                                                                 )
