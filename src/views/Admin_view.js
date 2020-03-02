@@ -20,7 +20,7 @@ class Admin_view extends Component {
     constructor(props) {
         super(props)
         fire()
-        this.state = ({cp_accounts: [], accounts: [], islogIn: false})
+        this.state = ({cp_accounts: [], accounts: [], isAdmin: false})
     }
     componentDidMount() {
         this._ismounted = true;
@@ -35,49 +35,46 @@ class Admin_view extends Component {
                         .push('/')
                     return
                 } else {
-                    this.setState({islogIn: true})
                     firebase
                         .database()
-                        .ref('accounts')
+                        .ref('accounts/' + user.uid)
+                        .child('role')
                         .once('value')
                         .then(snapshot => {
-                            snapshot.forEach(item => {
-                                this.setState({
-                                    accounts: this
-                                        .state
-                                        .accounts
-                                        .concat({
-                                            name: item
-                                                .val()
-                                                .name,
-                                            uid: item.key,
-                                            role: item
-                                                .val()
-                                                .role
+                            if (snapshot.val() !== 'Admin') {
+                                alert('접근 권한이 없습니다!')
+                                this
+                                    .props
+                                    .history
+                                    .push('/Main')
+                            } else {
+                                this.setState({isAdmin: true})
+                                firebase
+                                    .database()
+                                    .ref('accounts')
+                                    .once('value')
+                                    .then(snapshot => {
+                                        snapshot.forEach(item => {
+                                            this.setState({
+                                                accounts: this
+                                                    .state
+                                                    .accounts
+                                                    .concat({
+                                                        name: item
+                                                            .val()
+                                                            .name,
+                                                        uid: item.key,
+                                                        role: item
+                                                            .val()
+                                                            .role
+                                                    })
+                                            }, () => {
+                                                this.setState({cp_accounts: this.state.accounts})
+                                            })
                                         })
-                                }, () => {
-                                    this.setState({cp_accounts: this.state.accounts})
-                                })
-                            })
-                        })
-                        .catch((e) => {
-                            console.log(e.code);
-                            switch (e.code) {
-                                case 'PERMISSION_DENIED':
-                                    alert('접근 권한이 없습니다!')
-                                    this
-                                        .props
-                                        .history
-                                        .push('/Main')
-                                    break;
-
-                                default:
-                                    alert(e)
-                                    console.log(e);
-                                    break;
+                                    })
                             }
-
-                        });
+                        })
                 }
             });
 
@@ -161,7 +158,7 @@ class Admin_view extends Component {
         return (
             <div>
                 {
-                    this.state.islogIn
+                    this.state.isAdmin
                         ? <Row>
                                 <Col>
                                     <Card className="my-3 mx-3">
