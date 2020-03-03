@@ -152,8 +152,36 @@ class Admin_view extends Component {
         })
     }
     delete = (e) => {
-        console.log(e.target.id);
-    }
+        // console.log(e.target.id);
+        const target_uid = e
+            .target
+            .id
+
+            firebase
+            .auth()
+            .currentUser
+            .getIdToken(true)
+            .then(function (token) {
+                //console.log(customToken)
+                const customeTokenReq = fetch(
+                    "https://asia-northeast1-mimi-chan.cloudfunctions.net/auth/admin",
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': token
+                        },
+                        body: target_uid
+                    }
+                )
+                customeTokenReq.then(res => {
+                    console.log(res);
+                })
+            })
+            .catch(e => {
+                alert(e)
+                console.log(e);
+            })
+        }
     render() {
         return (
             <div>
