@@ -21,6 +21,7 @@ class Password_reset extends Component {
         fire();
         this.state = ({email: ''});
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
         if (!this.state.email) {
@@ -37,7 +38,7 @@ class Password_reset extends Component {
 
             auth
                 .sendPasswordResetEmail(emailAddress)
-                .then(()=>{
+                .then(() => {
                     // Email sent.
                     alert('해당 이메일 주소로 비밀번호 변경 관련 메일을 보냈습니다!')
                     this
@@ -52,11 +53,13 @@ class Password_reset extends Component {
                 });
         }
     }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         });
     }
+
     render() {
         return (
             <div>

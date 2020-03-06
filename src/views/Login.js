@@ -21,6 +21,7 @@ class Login extends Component {
         fire();
         this.state = ({email: '', password: ''});
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
         if (!this.state.email || !this.state.password) {
@@ -48,15 +49,16 @@ class Login extends Component {
                             break;
                         default:
                             alert(e)
-                            console.log(e);
+                            console.log(e.code);
                             break;
                     }
                 });
         } catch (e) {
-            console.log(e);    
-            alert(e.message);
+            alert(e);
+            console.log(e);
         }
     }
+
     handleGoogleSubmit() {
         try {
             const googleAuthProvider = new firebase
@@ -83,21 +85,27 @@ class Login extends Component {
                                     .set({email: res.user.email, name: res.user.displayName})
                                     .catch((e) => {
                                         alert(e)
-                                        console.log(e);
+                                        console.log(e.code);
                                     });
                             }
                         })
                 })
-        } catch (e) {
+                .catch((e) => {
+                    alert(e)
+                    console.log(e.code);
+                })
+            } catch (e) {
             console.log(e);
-            alert(e.code);
+            alert(e);
         }
     }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
+    
     render() {
         return (
             <div>
@@ -153,7 +161,7 @@ class Login extends Component {
                 {
                     <Row className="m-5">
                             <GoogleButton label='구글계정으로 로그인' onClick={() => this.handleGoogleSubmit()}/>
-                        </Row>
+                    </Row>
                 }
             </div>
         );

@@ -21,60 +21,66 @@ class SignUpPage extends Component {
         fire();
         this.state = ({username: '', email: '', password: ''});
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
         if (!this.state.email || !this.state.password || !this.state.username) {
             alert('빈칸을 채워주세요!');
             return;
         }
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(res => {
-                if (res.user) {
-                    res
-                        .user
-                        .updateProfile({displayName: this.state.username})
-                    alert('회원이 되신것을 환영합니다!')
-                    this
-                        .props
-                        .history
-                        .push('/')
-                    firebase
-                        .database()
-                        .ref('accounts/' + res.user.uid)
-                        .set({email: this.state.email, name: this.state.username})
-                        .catch((e) => {
-                            alert(e)
+        try {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(this.state.email, this.state.password)
+                .then(res => {
+                    if (res.user) {
+                        res
+                            .user
+                            .updateProfile({displayName: this.state.username})
+                        alert('회원이 되신것을 환영합니다!')
+                        this
+                            .props
+                            .history
+                            .push('/')
+                        firebase
+                            .database()
+                            .ref('accounts/' + res.user.uid)
+                            .set({email: this.state.email, name: this.state.username})
+                            .catch((e) => {
+                                alert(e)
+                                console.log(e);
+                            });
+                    }
+                })
+                .catch((e) => {
+                    switch (e.code) {
+                        case 'auth/email-already-in-use':
+                            alert('이미 가입된 계정입니다');
+                            break;
+                        case 'auth/weak-password':
+                            alert('비밀번호는 최소 6자리 이상입니다');
+                            break;
+                        case 'auth/invalid-email':
+                            alert("이메일 형식이 잘못 되었습니다")
+                            break
+                        default:
+                            alert(e);
                             console.log(e);
-
-                        });
-                }
-
-            })
-            .catch((e) => {
-                switch (e.code) {
-                    case 'auth/email-already-in-use':
-                        alert('이미 가입된 계정입니다');
-                        break;
-                    case 'auth/weak-password':
-                        alert('비밀번호는 최소 6자리 이상입니다');
-                        break;
-                    case 'auth/invalid-email':
-                        alert("이메일 형식이 잘못 되었습니다")
-                        break
-                    default:
-                        alert(e);
-                        console.log(e);
-                        break;
-                }
-            });
+                            break;
+                    }
+                });
+        } catch (e) {
+            alert(e)
+            console.log(e);
+        }
     }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         });
     }
+
     render() {
         return (
             <div>
