@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import React, {Component} from 'react';
 import {
     Container,
@@ -16,6 +15,7 @@ class Main extends Component {
         fire()
         this.state = ({islogIn: false, string: ''})
     }
+
     static getDerivedStateFromProps(nextProps, prevState) {
         if (prevState.islogIn) {
             return {
@@ -31,7 +31,9 @@ class Main extends Component {
             return {string: null}
         }
     }
+
     componentDidMount() {
+        this._ismounted = true;
         firebase
             .auth()
             .onAuthStateChanged(user => {
@@ -40,12 +42,13 @@ class Main extends Component {
                     this
                         .props
                         .history
-                        .push('/')
+                        .replace('/')
                 } else {
                     this.setState({islogIn: true})
                 }
             });
     }
+
     render() {
         return (
             <Container fluid>

@@ -25,24 +25,30 @@ export default class UserActions extends React.Component {
             .toggleUserActions
             .bind(this);
     }
+
     componentDidMount() {
-        firebase
-            .auth()
-            .onAuthStateChanged((user) => {
-                if (user) {
-                    this.setState({username: user.displayName});
-                    firebase
-                        .database()
-                        .ref('accounts/' + user.uid)
-                        .child('role')
-                        .once('value')
-                        .then(snapshot => {
-                            if (snapshot.val() === 'Admin') {
-                                this.setState({isAdmin: true})
-                            }
-                        })
-                }
-            });
+        try {
+            firebase
+                .auth()
+                .onAuthStateChanged((user) => {
+                    if (user) {
+                        this.setState({username: user.displayName});
+                        firebase
+                            .database()
+                            .ref('accounts/' + user.uid)
+                            .child('role')
+                            .once('value')
+                            .then(snapshot => {
+                                if (snapshot.val() === 'Admin') {
+                                    this.setState({isAdmin: true})
+                                }
+                            })
+                    }
+                });
+        } catch (error) {
+            alert(error)
+            console.log(error);
+        }
     }
 
     toggleUserActions() {
@@ -62,7 +68,6 @@ export default class UserActions extends React.Component {
                 // An error happened.
                 alert(error)
                 console.log(error);
-                
             });
     }
 

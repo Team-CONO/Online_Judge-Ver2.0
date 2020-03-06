@@ -15,58 +15,65 @@ class Tables extends Component {
         fire()
         this.state = ({islevel: [], islogIn: false})
     }
+
     componentDidMount() {
-        firebase
-            .auth()
-            .onAuthStateChanged(user => {
-                if (!user) {
-                    alert('비정상적인 접근입니다!')
-                    this
-                        .props
-                        .history
-                        .push('/')
-                } else {
-                    this.setState({islogIn: true})
-                    firebase
-                        .database()
-                        .ref('posts' + this.props.location.pathname)
-                        .once('value')
-                        .then(snapshot => {
-                            snapshot.forEach(item => {
-                                this.setState({
-                                    islevel: this
-                                        .state
-                                        .islevel
-                                        .concat({
-                                            title: item
-                                                .val()
-                                                .title,
-                                            url: item
-                                                .val()
-                                                .url
-                                        })
+        try {
+            firebase
+                .auth()
+                .onAuthStateChanged(user => {
+                    if (!user) {
+                        alert('비정상적인 접근입니다!')
+                        this
+                            .props
+                            .history
+                            .replace('/')
+                    } else {
+                        this.setState({islogIn: true})
+                        firebase
+                            .database()
+                            .ref('posts' + this.props.location.pathname)
+                            .once('value')
+                            .then(snapshot => {
+                                snapshot.forEach(item => {
+                                    this.setState({
+                                        islevel: this
+                                            .state
+                                            .islevel
+                                            .concat({
+                                                title: item
+                                                    .val()
+                                                    .title,
+                                                url: item
+                                                    .val()
+                                                    .url
+                                            })
+                                    })
                                 })
                             })
-                        })
-                        .catch((e) => {
-                            console.log(e.code);
-                            switch (e.code) {
-                                case 'PERMISSION_DENIED':
-                                    alert('접근 권한이 없습니다!')
-                                    this
-                                        .props
-                                        .history
-                                        .push('/Main')
-                                    break;
-                                default:
-                                    alert(e)
-                                    console.log(e);
-                                    break;
-                            }
-                        });
-                }
-            });
+                            .catch((e) => {
+                                console.log(e.code);
+                                switch (e.code) {
+                                    case 'PERMISSION_DENIED':
+                                        alert('접근 권한이 없습니다!')
+                                        this
+                                            .props
+                                            .history
+                                            .push('/Main')
+                                        break;
+                                    default:
+                                        alert(e)
+                                        console.log(e.code);
+                                        break;
+                                }
+                            });
+                    }
+                });
+        } catch (error) {
+            alert(error)
+            console.log(error);
+        }
     }
+
     get_files = (url) => {
         if (url) {
             try {
@@ -80,6 +87,7 @@ class Tables extends Component {
             alert('파일이 존재하질 않습니다!')
         }
     }
+
     render() {
         return (
             <div>
