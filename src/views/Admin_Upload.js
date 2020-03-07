@@ -13,6 +13,7 @@ import {
 } from "shards-react";
 import firebase, {fire} from '../Firebase';
 import ReactQuill from "react-quill";
+import { functions } from 'firebase';
 
 class Admin_Upload extends Component {
     constructor(props) {
@@ -25,7 +26,8 @@ class Admin_Upload extends Component {
             tag: 'Select by Difficult',
             postTitle: "",
             postKey: "",
-            postBody: ""
+            postBody: "",
+            flag: false
         };
         fire();
         //console.log(firebase.auth().currentUser)
@@ -94,6 +96,8 @@ class Admin_Upload extends Component {
             //console.log(user) console.log(admin.auth().createCustomToken(user.uid))
             if (user) {
 
+                alert('업로드를 시작합니다.\n 잠시만 기다려주세요.')
+
                 var _fileLen = this.state.selectedFile.length;
 
                 // var _lastDot = this
@@ -142,7 +146,10 @@ class Admin_Upload extends Component {
                 }
                 // var storagepath = 'posts/' + postData.postKey + '/' + postData.guidCode +
                 //         _fileName
+                var databasepath = 'posts/' + postData.tag + "/" + postData.postKey
                 var storagepath = 'posts/' + postData.postKey + '/' + _fileName
+
+                var flag = false;
                 console.log(storagepath)
 
                 //alert("Storage Start")
@@ -188,9 +195,17 @@ class Admin_Upload extends Component {
                                                         .then(function (url) {
                                                             firebase
                                                                 .database()
-                                                                .ref('posts/' + postData.tag + "/" + postData.postKey)
+                                                                .ref(databasepath)
                                                                 .set(
-                                                                    {title: postData.postTitle, body: postData.postBody, url: url, filename: _fileName}
+                                                                    {title: postData.postTitle, body: postData.postBody, url: url, filename: _fileName},
+                                                                    function(error) {
+                                                                        if (error) {
+                                                                          console.log(e);
+                                                                        } else {
+                                                                            flag = true;
+                                                                            //setTimeout(clearInterval(intervalId),1000)
+                                                                        }
+                                                                    }
                                                                 )
                                                                 .catch((e) => {
                                                                     console.log('3');
@@ -213,7 +228,13 @@ class Admin_Upload extends Component {
                             })
                         });
 
-                alert('업로드가 완료되었습니다!')
+                    var intervalId = setInterval(() => {
+                        if(flag){
+                            alert('업로드가 완료되었습니다!')
+                            this.props.history.push('/Main')
+                            clearInterval(intervalId)
+                        }
+                    }, 1000);
             }
         } catch (e) {
             console.log(e)
