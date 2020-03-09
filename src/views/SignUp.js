@@ -99,7 +99,7 @@ class SignUpPage extends Component {
                             <CardBody>
                                 <Form onSubmit={this.handleSubmit}>
                                     <FormGroup className="text-left">
-                                        <label htmlFor="#username">닉네임</label>
+                                        <label htmlFor="#username">회원명</label>
                                         <FormInput
                                             type="text"
                                             name="username"

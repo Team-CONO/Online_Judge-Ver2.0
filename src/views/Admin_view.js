@@ -22,6 +22,7 @@ class Admin_view extends Component {
         fire()
         this.state = ({cp_accounts: [], accounts: [], isAdmin: false})
     }
+
     componentDidMount() {
         this._ismounted = true;
         firebase
@@ -77,19 +78,20 @@ class Admin_view extends Component {
                         })
                 }
             });
-
     }
+
     handleChange = (e) => {
         firebase
             .database()
             .ref('accounts/' + e.target.id)
             .update({'role': e.target.value})
-            .then(alert('변경 완료!'))
+            .then(alert('변경 완료!'), window.location.reload())
             .catch((e) => {
                 alert(e)
                 console.log(e)
             });
     }
+
     show_select(uid, role) {
         switch (role) {
             case 'E':
@@ -140,8 +142,10 @@ class Admin_view extends Component {
                 )
         }
     }
+
     handelSearch = (e) => {
         e.preventDefault();
+
         let target_name = e.target.value
         target_name = target_name.replace(/\\/g, "\\\\")
         this.setState({
@@ -151,19 +155,16 @@ class Admin_view extends Component {
                 .filter(element => element.name.toLowerCase().match(target_name))
         })
     }
+
     delete = (e) => {
         // console.log(e.target.id);
-        const target_uid = e
-            .target
-            .id
-
-            firebase
+        const target_uid = e.target.id;
+        firebase
             .auth()
             .currentUser
             .getIdToken(true)
             .then(function (token) {
-                //console.log(customToken)
-                const customeTokenReq = fetch(
+                const delete_user = fetch(
                     "https://asia-northeast1-mimi-chan.cloudfunctions.net/auth/admin",
                     {
                         method: 'POST',
@@ -173,15 +174,29 @@ class Admin_view extends Component {
                         body: target_uid
                     }
                 )
-                customeTokenReq.then(res => {
-                    console.log(res);
+                delete_user
+                    .then(res => {
+                        firebase
+                            .database()
+                            .ref('accounts/' + target_uid)
+                            .remove()
+                            .then(alert('해당 회원이 삭제 되었습니다'), window.location.reload())
+                            .catch((e) => {
+                                alert(e)
+                                console.log(e);
+                            })
+                        })
+                    .catch((e) => {
+                        alert(e)
+                        console.log(e);
+                    })
                 })
-            })
             .catch(e => {
                 alert(e)
                 console.log(e);
             })
         }
+
     render() {
         return (
             <div>
@@ -203,7 +218,7 @@ class Admin_view extends Component {
                                                 <FormInput
                                                     onChange={this.handelSearch}
                                                     className="navbar-search"
-                                                    placeholder="닉네임 조회"/>
+                                                    placeholder="회원명 조회"/>
                                             </InputGroup>
                                         </Form>
                                         <CardBody className="p-0 pb-3">
@@ -214,7 +229,7 @@ class Admin_view extends Component {
                                                             #
                                                         </th>
                                                         <th scope="col" className="border-0">
-                                                            닉네임
+                                                            회원명
                                                         </th>
                                                         <th scope="col" className="border-0">
                                                             등급
@@ -238,7 +253,7 @@ class Admin_view extends Component {
                                                                         </td>
                                                                         <td>
                                                                             <Button id={acc.uid} squared theme="danger" onClick={this.delete}>
-                                                                                제거
+                                                                                삭제
                                                                             </Button>
                                                                         </td>
                                                                     </tr>
