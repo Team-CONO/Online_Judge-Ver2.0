@@ -7,9 +7,13 @@ https://github.com/BSAA0203/Online_Judge
 # Prerequisites
     Node.js v10.16.3
     
-    Firebase
+    Firebase v7.6.2
+    
+    Firebase-admin v8.9.2
+    
+    Yarn v1.17.3
 # Get Start
-    > cd Nextop_Online_Judge-Ver2.0
+    > cd Online_Judge-Ver2.0
     > yarn
     > yarn start
 # Open-source template
