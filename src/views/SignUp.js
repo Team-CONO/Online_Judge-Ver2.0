@@ -48,7 +48,7 @@ class SignUpPage extends Component {
                             .set({email: this.state.email, name: this.state.username})
                             .catch((e) => {
                                 alert(e)
-                                console.log(e);
+                                //console.log(e);
                             });
                     }
                 })
@@ -65,13 +65,13 @@ class SignUpPage extends Component {
                             break
                         default:
                             alert(e);
-                            console.log(e);
+                            //console.log(e);
                             break;
                     }
                 });
         } catch (e) {
             alert(e)
-            console.log(e);
+            //console.log(e);
         }
     }
 
@@ -86,14 +86,14 @@ class SignUpPage extends Component {
             <div>
                 <Row className="page-header py-4">
                     <Col>
-                        <Link to="/"><img src={logo}/></Link>
+                        <Link to="/"><img src={logo} width="220px" height="200px"/></Link>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Card>
                             <CardHeader className="border-bottom">
-                                <h3 className='m-0'>넥스탑에 회원가입</h3>
+                                <h3 className='mx-5'>회원가입</h3>
                             </CardHeader>
 
                             <CardBody>

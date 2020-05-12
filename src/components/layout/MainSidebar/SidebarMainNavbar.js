@@ -33,9 +33,9 @@ class SidebarMainNavbar extends React.Component {
             <div className="d-table m-auto">
               <img
                 id="main-logo"
-                className="d-inline-block align-top"
-                style={{ maxWidth: "160px" }}
-                src='http://www.nextopedu.co.kr/default/img/_images/logo.png'
+                className="d-inline-block align-top mr-4"
+                style={{ maxWidth: "100px" }}
+                src='https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark.png'
                 alt="Nextop Algorithm"
               />
               {/* {!hideLogoText && (

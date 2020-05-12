@@ -49,13 +49,13 @@ class Login extends Component {
                             break;
                         default:
                             alert(e)
-                            console.log(e.code);
+                            //console.log(e.code);
                             break;
                     }
                 });
         } catch (e) {
             alert(e);
-            console.log(e);
+            //console.log(e);
         }
     }
 
@@ -85,17 +85,17 @@ class Login extends Component {
                                     .set({email: res.user.email, name: res.user.displayName})
                                     .catch((e) => {
                                         alert(e)
-                                        console.log(e.code);
+                                        //console.log(e.code);
                                     });
                             }
                         })
                 })
                 .catch((e) => {
                     alert(e)
-                    console.log(e.code);
+                    //console.log(e.code);
                 })
             } catch (e) {
-            console.log(e);
+            //console.log(e);
             alert(e);
         }
     }
@@ -111,14 +111,14 @@ class Login extends Component {
             <div>
                 <Row className="page-header py-4">
                     <Col>
-                        <Link to="/"><img src={logo}/></Link>
+                        <Link to="/"><img src={logo} width="220px" height="200px"/></Link>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Card>
                             <CardHeader className="border-bottom">
-                                <h3 className='m-0'>넥스탑에 로그인</h3>
+                                <h3 className='m-0'>사이트에 로그인</h3>
                             </CardHeader>
 
                             <CardBody>
@@ -150,7 +150,7 @@ class Login extends Component {
                                             로그인
                                         </Button>
                                         <div className='mt-3'>
-                                            <Link to='/SignUp'>넥스탑에 처음이신가요?</Link>
+                                            <Link to='/SignUp'>여기는 처음이신가요?</Link>
                                         </div>
                                     </FormGroup>
                                 </Form>

@@ -49,7 +49,7 @@ class Password_reset extends Component {
                 .catch(function (error) {
                     // An error happened.
                     alert("잘못된 주소 입니다...")
-                    console.log(error);
+                    //console.log(error);
                 });
         }
     }
@@ -65,7 +65,7 @@ class Password_reset extends Component {
             <div>
                 <Row className="page-header py-4">
                     <Col>
-                        <Link to="/"><img src={logo}/></Link>
+                        <Link to="/"><img src={logo} width="220px" height="200px"/></Link>
                     </Col>
                 </Row>
                 <Row>
