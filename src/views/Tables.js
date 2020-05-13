@@ -102,7 +102,7 @@ class Tables extends Component {
                                                     #
                                                 </th>
                                                 <th scope="col" className="border-0">
-                                                    문제 이름
+                                                    타이틀
                                                 </th>
                                                 <th scope="col" className="border-0">
                                                     업로더

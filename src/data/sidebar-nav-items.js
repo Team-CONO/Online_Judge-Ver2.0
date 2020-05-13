@@ -19,7 +19,7 @@ export default function() {
       htmlAfter: ''
     },
     {
-      title: '경시대회',
+      title: 'Other',
       to: '/Other',
       htmlBefore: '<i class="material-icons">public</i>',
       htmlAfter: ''

@@ -95,7 +95,7 @@ export default class UserActions extends React.Component {
                                     </DropdownItem>
                                     <DropdownItem tag={Link} to="/Admin_Upload">
                                         <i className="material-icons">post_add</i>
-                                        문제 등록
+                                        게시물 등록
                                     </DropdownItem>
                                     <DropdownItem divider/>
                                     <DropdownItem tag={Link} to="/" onClick={this.logout} className="text-danger">

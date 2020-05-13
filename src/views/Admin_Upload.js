@@ -262,7 +262,7 @@ class Admin_Upload extends Component {
                                 <Col>
                                     <Card className="my-4 mx-5">
                                         <CardHeader className="">
-                                            <h4 className='m-0'>파일 업로드</h4>
+                                            <h4 className='m-0'>게시물 업로드</h4>
                                         </CardHeader>
                                         <CardBody>
                                             <FormInput
