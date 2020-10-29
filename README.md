@@ -11,7 +11,7 @@ https://github.com/BSAA0203/Online_Judge
     
     Firebase-admin v8.9.2
     
-    Yarn v1.17.3
+    React v16.13.1
 # Get Start
     > cd Online_Judge-Ver2.0
     > yarn
