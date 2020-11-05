@@ -7,11 +7,9 @@ https://github.com/BSAA0203/Online_Judge
 # Prerequisites
     Node.js v10.16.3
     
-    Firebase v7.6.2
+    Firebase V8.4.1
     
-    Firebase-admin v8.9.2
-    
-    React v16.13.1
+    React V3.1.1
 # Get Start
     > cd Online_Judge-Ver2.0
     > yarn
